@@ -101,7 +101,7 @@ article {
     position: relative;
 }
 .posts {
-    width: 700px; /* 设置贴文区块的固定宽度 */
+    width: 700px; 
     margin-right: 10px;
 }
 #sidebar {
