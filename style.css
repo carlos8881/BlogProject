@@ -31,7 +31,7 @@ header .top h1 a {
     display: flex; /* 設置 .menu 為彈性盒子布局 */
     justify-content: space-between; /* 將 .menu 內的項目兩端對齊，間距均等 */
     align-items: center; /* 將 .menu 內的項目垂直居中對齊 */
-    padding: 10px 18%; 
+    padding: 10px 18%; /* 設置 .menu 的內邊距為上下 10px */
 }
 header .menu ul {
     list-style: none; /* 移除 ul 的列表樣式 */
@@ -84,8 +84,8 @@ main .outer {
 }
 aside {
     background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
-    padding: 20px; /* 設置 aside 和 section 的內邊距為 20px12321321 */
-    border-radius: 8px;
+    padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
+    border-radius: 8px; /* 設置 aside 和 section 的圓角為 8px */
 }
 article {
     background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
@@ -101,7 +101,7 @@ article {
     position: relative;
 }
 .posts {
-    width: 700px; 
+    width: 700px; /* 设置贴文区块的固定宽度 */
     margin-right: 10px;
 }
 #sidebar {
