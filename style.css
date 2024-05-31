@@ -85,7 +85,7 @@ main .outer {
 aside {
     background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
     padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
-    border-radius: 8px; /* 設置 aside 和 section 的圓角為 8px */
+    border-radius: 8px;
 }
 article {
     background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
