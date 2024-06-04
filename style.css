@@ -6,6 +6,9 @@
     margin: 0; /* 移除所有元素的外邊距 */
     box-sizing: border-box; /* 設置 box-sizing 為 border-box，確保內邊距和邊框包含在元素的總寬度和高度內 */
 }
+a{
+    text-decoration: none;
+}
 body {
     background-color: rgb(24, 28, 30); /* 設定網頁背景色為深灰色 */
     color: rgb(235, 235, 235); /* 設定文本顏色為淺灰色 */
@@ -25,6 +28,7 @@ header .top {
 }
 header .top h1 a {
     color: rgb(235, 235, 235); /* 設置 h1 標題的連結顏色為淺灰色 */
+    font-size: 54px;
     text-decoration: none; /* 移除連結的下劃線 */
 }
 .menu {
@@ -204,4 +208,49 @@ article {
 }
 .data:last-child {
     border-right: none;
+}
+.article.posts {
+    display: flex;
+}
+.article-header h1 {
+    display: flex;
+    font-size: 28px;
+    color: rgb(235, 235, 235);
+}
+.article-header a {
+    text-decoration: none;
+}
+.article-meta {
+    display: flex;
+    color: rgb(235, 235, 235);
+    font-size: 15px;
+}
+.article-category a:visited  {
+    color: rgb(235, 235, 235);
+}
+.article-date {
+    margin-right: 8px;
+}
+.article-category {
+    margin-right: 8px;
+}
+.article-category a {
+    text-decoration: none;
+}
+.article-entry {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.article-more-link a:visited {
+    color: rgb(235, 235, 235);
+}
+.article-footer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.article-footer a {
+    color: rgb(235, 235, 235);
+}
+.article-share-link {
+    margin-left: 20px;
 }
