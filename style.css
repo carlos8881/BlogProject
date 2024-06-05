@@ -236,6 +236,7 @@ article {
 }
 .article-category a {
     text-decoration: none;
+    color: rgb(235, 235, 235);
 }
 .article-entry {
     margin-top: 10px;
@@ -253,7 +254,7 @@ article {
     border-radius: 24px;
     margin: 0px;
     padding: 2px 14px;
-    background-color: rgb(128, 149, 173);
+    background-color: rgb(36, 56, 121);
     margin-bottom: 1px;
 }
 .article-more-link a:visited {
@@ -274,4 +275,20 @@ article {
 }
 .article-footer {
     margin-top: 20px;
+}
+#sidebar ul.category-list {
+    list-style: none; /* 移除默认的列表样式 */
+    padding: 0;
+}
+li.category-list-item {
+    position: relative; /* 设置相对定位 */
+    padding-left: 20px; /* 给左侧预留空间放置自定义符号 */
+}
+li.category-list-item::before {
+    content: '\25B6'; /* 使用 Unicode 字符表示向右的三角形符号 */
+    position: absolute; /* 绝对定位 */
+    left: 0; /* 左对齐 */
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 垂直居中调整 */
+    color: rgb(235, 235, 235); /* 设置符号颜色 */
 }
