@@ -318,5 +318,5 @@ a.article-header-a h1{
 footer#footer {
     display: flex;
     justify-content: center;
-    margin:20px 20px;
+    margin:20px 0px;
 }
