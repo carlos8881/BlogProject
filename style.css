@@ -220,10 +220,14 @@ article {
 .article-header a {
     text-decoration: none;
 }
+a.article-header-a h1{
+    margin-bottom: 10px;
+}
 .article-meta {
     display: flex;
     color: rgb(235, 235, 235);
     font-size: 15px;
+    margin-bottom: 20px;
 }
 .article-category a:visited  {
     color: rgb(235, 235, 235);
@@ -266,6 +270,7 @@ article {
 .article-footer {
     display: flex;
     flex-direction: row-reverse;
+    margin-top: 30px;
 }
 .article-footer a {
     color: rgb(235, 235, 235);
@@ -273,22 +278,39 @@ article {
 .article-share-link {
     margin-left: 20px;
 }
-.article-footer {
-    margin-top: 20px;
+/* 设置侧边栏标题样式 */
+.widget-title {
+    color: #ffffff; /* 设置标题颜色 */
+    margin-bottom: 20px;
 }
-#sidebar ul.category-list {
-    list-style: none; /* 移除默认的列表样式 */
-    padding: 0;
+
+/* 设置分类列表的样式 */
+.category-list {
+    list-style: none; /* 移除列表的默认样式 */
+    padding: 0px;
 }
-li.category-list-item {
-    position: relative; /* 设置相对定位 */
-    padding-left: 20px; /* 给左侧预留空间放置自定义符号 */
+
+/* 设置分类列表项的样式 */
+.category-list-item {
+    margin-bottom: 20px; /* 设置每个列表项的底部边距 */
 }
-li.category-list-item::before {
-    content: '\25B6'; /* 使用 Unicode 字符表示向右的三角形符号 */
+
+/* 设置分类列表链接的样式 */
+.category-list-link {
+    text-decoration: none; /* 移除链接的下划线 */
+    color: #ffffff; /* 设置链接颜色 */
+    position: relative; /* 设置相对定位以便添加伪元素 */
+    padding-left: 20px; /* 设置左侧内边距以便显示箭头 */
+    display: inline-block; /* 将链接设置为块级元素以便调整位置 */
+}
+
+/* 在链接左侧添加箭头 */
+.category-list-link::before {
+    content: '\25B6'; /* 使用 Unicode 字符表示向右的三角形箭头 */
     position: absolute; /* 绝对定位 */
-    left: 0; /* 左对齐 */
+    left: 6px; /* 左对齐 */
     top: 50%; /* 垂直居中 */
-    transform: translateY(-50%); /* 垂直居中调整 */
-    color: rgb(235, 235, 235); /* 设置符号颜色 */
+    transform: translateY(-50%); /* 调整箭头位置使其垂直居中 */
+    color: #ffffff; /* 设置箭头颜色 */
+    font-size: 8px; /* 设置箭头大小 */
 }
