@@ -73,45 +73,6 @@
                     <article class="posts">
                         <header class="article-header">
                             <h1>
-                                <a href="post_20240605.html" class="article-header-a">ChatGPT 技巧筆記</a>
-                            </h1>
-                            <div class="article-meta">
-                                <div class="article-date">
-                                    <i class='bx bx-calendar'></i>
-                                    <time datetime="2024-06-04 18:00:00 +0800 CST" itemprop="datePublished">2024-06-04</time>
-                                </div>
-                                <div class="article-category">
-                                    <i class='bx bx-folder'></i>
-                                    <a href="#" class="article-category-link">筆記</a>
-                                </div>
-                                <div class="article-category">
-                                    <i class='bx bx-purchase-tag'></i>
-                                    <a href="#" class="article">AI</a>
-                                </div>
-                            </div>
-                        </header>
-                        <div class="article-entry" itemprop="articleBody">
-                            <p>使用流程 1. 登記使用者、信箱 2. 初始化 3. 將要更改的檔案加入暫存區 4. 檢查差異(可跳過) 5. 提交......
-                                </p>
-                            <p class="article-more-link">
-                                <a href="#">Read more</a>
-                            </p>
-                        </div>
-                        <footer class="article-footer">
-                            <a href="#" data-id="" class="article-share-link">
-                                <i class='bx bx-share' ></i>
-                                Share
-                            </a>
-                            <a href="#" class="article-comment-link">
-                                <i class='bx bx-message-rounded-dots' ></i>
-                                Comments
-                            </a>
-                        </footer>
-                    </article>
-
-                    <article class="posts">
-                        <header class="article-header">
-                            <h1>
                                 <a href="post_20240605.html" class="article-header-a">Git 指令筆記</a>
                             </h1>
                             <div class="article-meta">
@@ -129,52 +90,114 @@
                                 </div>
                             </div>
                         </header>
-                        
                         <div class="article-entry" itemprop="articleBody">
-                            <p>使用流程 1. 登記使用者、信箱 2. 初始化 3. 將要更改的檔案加入暫存區 4. 檢查差異(可跳過) 5. 提交......
-                                </p>
-                            <p class="article-more-link">
-                                <a href="post_20240605.html">Read more</a>
-                            </p>
-                        </div>
-                        <footer class="article-footer">
-                            <a href="#" data-id="" class="article-share-link">
-                                <i class='bx bx-share' ></i>
-                                Share
-                            </a>
-                            <a href="#" class="article-comment-link">
-                                <i class='bx bx-message-rounded-dots' ></i>
-                                Comments
-                            </a>
-                        </footer>
-                    </article>
+                            <pre>
+<h3>使用流程</h3>1. 登記使用者、信箱 
+2. 初始化
+3. 將要更改的檔案加入暫存區
+4. 檢查差異(可跳過)
+5. 提交更改
 
-                    <article class="posts">
-                        <header class="article-header">
-                            <h1>
-                                <a href="about_me.html" class="article-header-a">About Me</a>
-                            </h1>
-                            <div class="article-meta">
-                                <div class="article-date">
-                                    <i class='bx bx-calendar'></i>
-                                    <time datetime="2024-06-04 18:00:00 +0800 CST" itemprop="datePublished">2024-06-04</time>
-                                </div>
-                                <div class="article-category">
-                                    <i class='bx bx-folder'></i>
-                                    <a href="#" class="article-category-link">自傳</a>
-                                </div>
-                                <div class="article-category">
-                                    <i class='bx bx-purchase-tag'></i>
-                                    <a href="#" class="article"></a>
-                                </div>
-                            </div>
-                        </header>
-                        
-                        <div class="article-entry" itemprop="articleBody">
-                            <p>關於我......
-                                </p>
+。建立.gitignore檔案，能寫入要忽略的檔名或副檔名
+
+<h3>指令</h3>指令:
+git init
+功能:
+Git 初始化設定指令
+用於將一般資料夾設定為可使用Git
+
+指令:
+git config –golbal user.name “(輸入使用者名稱)”
+git config –golbal user.email “(輸入使用者信箱)”
+功能:
+設定姓名信箱
+
+指令:
+git status
+功能:
+查看狀態，是否有異動
+
+指令:
+git log – oneline
+功能:
+快速 查看已儲存版本
+
+指令:
+git log
+功能:
+詳細 查看已儲存版本
+
+指令:
+git add (“.” or 檔名 含副檔名 or *. 副檔名)
+"." 加入所有檔案
+"index.html" "test.py"
+“.html” ".css" “.py” 所有同副檔名的檔案
+功能:
+檔案更動後，添加進準備存檔清單(暫存區)
+
+指令:
+git commit -m “(存檔名稱or版本or訊息)”
+功能:
+存檔清單內的檔案
+
+指令:
+git diff (還原點) – 檔名
+功能:
+查看新舊版本差異
+
+指令:
+git checkout (還原點ID) – (檔案名稱)
+功能:
+暫存回還原點(待提交)
+
+指令:
+git reset --hard (還原點ID)
+功能:
+回到還原點，還原點後的存檔刪除，reflog指令可恢復
+
+指令:
+git reflog
+功能:
+查看所有動作紀錄，可查找刪除的還原點ID
+
+指令:
+git reset (存檔點ID)
+功能:
+還原到指定的存檔點截止
+
+指令:
+git add "(已刪除的檔案)"
+功能:
+追蹤手動刪除的檔案，以便版本更新
+
+指令:
+git clone (網址)
+功能:
+下載Github上的檔案
+(下在後在終端機使用 cd (資料夾名稱)指令切換目錄)
+
+指令:
+git push
+功能:
+更新到Github上
+
+指令:
+git pull
+功能:
+更新為線上的檔案
+
+指令:
+git checkout -b (新分支名稱)
+功能:
+創建自己的分支
+
+指令:
+git push origin (新分支名稱)
+功能:
+上傳新分支待審核
+                            </pre>
                             <p class="article-more-link">
-                                <a href="about_me.html">Read more</a>
+                                <a href="#">Read more</a>
                             </p>
                         </div>
                         <footer class="article-footer">
@@ -187,7 +210,6 @@
                                 Comments
                             </a>
                         </footer>
-                        
                     </article>
                 </section>
                 <aside id="sidebar">
