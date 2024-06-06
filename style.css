@@ -221,6 +221,7 @@ article {
 }
 .article-header a {
     text-decoration: none;
+    color: rgb(235, 235, 235);
 }
 .article-header h1 a:visited{
     color: rgb(235, 235, 235);
