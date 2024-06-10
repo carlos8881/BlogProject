@@ -1,6 +1,9 @@
 new Vue({
     el: '#app',
     data: {
-        categories: ['筆記', '自傳']
+        categories: [
+            { name: '筆記', link: 'category_note.html' },
+            { name: '自傳', link: 'biography.html' },
+        ]
     }
 });

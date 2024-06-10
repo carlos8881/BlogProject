@@ -75,7 +75,7 @@
                     <article class="posts">
                         <header class="article-header">
                             <h1>
-                                <a href="post_20240605.html" class="article-header-a">ChatGPT 技巧筆記</a>
+                                <a href="#" class="article-header-a">ChatGPT 技巧筆記</a>
                             </h1>
                             <div class="article-meta">
                                 <div class="article-date">
@@ -214,8 +214,8 @@ git push origin (新分支名稱)
                 <aside id="sidebar">
                     <h3 class="widget-title">Categories</h3>
                     <ul class="category-list">
-                        <li v-for="category in categories" :key="category" class="category-list-item">
-                            <a href="#" class="category-list-link">{{ category }}</a><span></span>
+                        <li v-for="category in categories" :key="category.name" class="category-list-item">
+                            <a :href="category.link" class="category-list-link">{{ category.name }}</a><span></span>
                         </li>
                     </ul>
                 </aside>
