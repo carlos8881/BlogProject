@@ -107,28 +107,22 @@ article {
 .posts {
     height: 280px;
     width: 700px; /* 设置贴文区块的固定宽度 */
-    margin-right: 20px;
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
 article.post-content {
     width: 700px; /* 设置贴文区块的固定宽度 */
-    margin-right: 20px;
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
-#sidebar {
+#sidebar-container {
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    margin-left: 20px;
 }
-.profile-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 30%;
-    width: 100%;
-    background-color: rgb(128, 149, 173);
-    border-radius: 24px 24px 0 0;
+.profile-container{
+
 }
 .image {
     position:relative;
@@ -309,7 +303,6 @@ article.post-content {
     color: #ffffff; /* 设置标题颜色 */
     margin-bottom: 20px;
 }
-
 /* 设置分类列表的样式 */
 .category-list {
     list-style: none; /* 移除列表的默认样式 */
@@ -339,6 +332,17 @@ article.post-content {
     transform: translateY(-50%); /* 调整箭头位置使其垂直居中 */
     color: #ffffff; /* 设置箭头颜色 */
     font-size: 8px; /* 设置箭头大小 */
+}
+#tag-library {
+    margin-top: 20px;
+}
+#tag-library .tags a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+#tag-library .tags a:hover {
+    
 }
 footer#footer {
     display: flex;

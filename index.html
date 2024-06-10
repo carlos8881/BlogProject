@@ -27,50 +27,52 @@
         </header>
         <main>
             <div class="outer">
-                <aside id="profile">
-                    <div class="image">
-                        <img src="profile.jpg" alt="photh-me" class="profile-img">
-                    </div>
-
-                    <div class="text-data">
-                        <span class="name">Carlos</span>
-                        <span class="other">*</span>
-                    </div>
-
-                    <div class="media-buttons">
-                        <a href="#" style="background: #4267b2" class="link">
-                            <i class='bx bxl-facebook'></i>
-                        </a>
-                        <a href="#" style="background: #1da1f2" class="link">
-                            <i class='bx bxl-twitter'></i>
-                        </a>
-                        <a href="#" style="background: #f15589" class="link">
-                            <i class='bx bxl-instagram-alt' ></i>
-                        </a>
-                        <a href="#" style="background:  #ff0000" class="link">
-                            <i class='bx bxl-youtube' ></i>
-                        </a>
-                    </div>
-
-                    <div class="buttons">
-                        <button class="button">Subscribe</button>
-                        <button class="button">Message</button>
-                    </div>
-                    <div class="analytics">
-                        <div class="data">
-                            <i class='bx bxs-edit-alt'></i>
-                            <span class="number">10</span>
+                <div class="profile-container">
+                    <aside id="profile">
+                        <div class="image">
+                            <img src="profile.jpg" alt="photh-me" class="profile-img">
                         </div>
-                        <div class="data">
-                            <i class='bx bxs-message-dots' ></i>
-                            <span class="number">20</span>
+
+                        <div class="text-data">
+                            <span class="name">Carlos</span>
+                            <span class="other">*</span>
                         </div>
-                        <div class="data">
-                            <i class='bx bxs-share' ></i>
-                            <span class="number">6</span>
+
+                        <div class="media-buttons">
+                            <a href="#" style="background: #4267b2" class="link">
+                                <i class='bx bxl-facebook'></i>
+                            </a>
+                            <a href="#" style="background: #1da1f2" class="link">
+                                <i class='bx bxl-twitter'></i>
+                            </a>
+                            <a href="#" style="background: #f15589" class="link">
+                                <i class='bx bxl-instagram-alt' ></i>
+                            </a>
+                            <a href="#" style="background:  #ff0000" class="link">
+                                <i class='bx bxl-youtube' ></i>
+                            </a>
                         </div>
-                    </div>
-                </aside>
+
+                        <div class="buttons">
+                            <button class="button">Subscribe</button>
+                            <button class="button">Message</button>
+                        </div>
+                        <div class="analytics">
+                            <div class="data">
+                                <i class='bx bxs-edit-alt'></i>
+                                <span class="number">10</span>
+                            </div>
+                            <div class="data">
+                                <i class='bx bxs-message-dots' ></i>
+                                <span class="number">20</span>
+                            </div>
+                            <div class="data">
+                                <i class='bx bxs-share' ></i>
+                                <span class="number">6</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
                 <section id="post">
                     <article class="posts">
                         <header class="article-header">
@@ -235,14 +237,23 @@
                         
                     </article>
                 </section>
-                <aside id="sidebar">
-                    <h3 class="widget-title">Categories</h3>
-                    <ul class="category-list">
-                        <li v-for="category in categories" :key="category.name" class="category-list-item">
-                            <a :href="category.link" class="category-list-link">{{ category.name }}</a><span></span>
-                        </li>
-                    </ul>
-                </aside>
+                <div id="sidebar-container">
+                    <aside class="sidebar">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul class="category-list">
+                            <li v-for="category in categories" :key="category.name" class="category-list-item">
+                                <a :href="category.link" class="category-list-link">{{ category.name }}</a><span></span>
+                            </li>
+                        </ul>
+                    </aside>
+                    <aside id="tag-library">
+                        <h3 class="tag-title">Tag</h3>
+                        <div class="tags">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                        </div>
+                    </aside>
+                </div>
             </div>
             <footer id="footer">© 2024 Carlos</footer>
         </main>
