@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" contnet="width=device-width, initial-scale=1.0">
-        <title>Carlos Blog</title>
-        <link rel="stylesheet" href="style.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
         <header>
             <div class="top">
                 <h1><a href="/">Carlos Blog</a></h1>
             </div>
             <div class="menu">
                 <ul>
-                    <li ><a href="about_me.html">About</a></li>
+                    <li><a href="about_me.html">About</a></li>
                     <li><a href="">Archive</a></li>
                 </ul>
                 <div class="search-container">
                     <input type="text" class="search-box" placeholder="Search">
-                    <button class="search-button"><i class='bx bx-search' ></i></button>
+                    <button class="search-button"><i class='bx bx-search'></i></button>
                 </div>
             </div>
         </header>
@@ -232,18 +234,15 @@
                 <aside id="sidebar">
                     <h3 class="widget-title">Categories</h3>
                     <ul class="category-list">
-                        <li class="category-list-item"><a href="#" class="category-list-link">筆記</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">自傳</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">3</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">4</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">5</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">6</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">7</a><span></span></li>
-                        <li class="category-list-item"><a href="#" class="category-list-link">8</a><span></span></li>
+                        <li v-for="category in categories" :key="category" class="category-list-item">
+                            <a href="#" class="category-list-link">{{ category }}</a><span></span>
+                        </li>
                     </ul>
                 </aside>
             </div>
             <footer id="footer">© 2024 Carlos</footer>
         </main>
-    </body>
-    </html>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
