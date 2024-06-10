@@ -105,9 +105,17 @@ article {
     position: relative;
 }
 .posts {
+    height: 280px;
     width: 700px; /* 设置贴文区块的固定宽度 */
     margin-right: 20px;
     margin-bottom: 20px;
+    position: relative; /* 確保 .post 元素相對定位 */
+}
+article.post-content {
+    width: 700px; /* 设置贴文区块的固定宽度 */
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative; /* 確保 .post 元素相對定位 */
 }
 #sidebar {
     flex: 1;
@@ -247,7 +255,7 @@ article {
 }
 .article-entry {
     margin-top: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 .article-more-link {
     margin-top: 25px;
@@ -274,9 +282,23 @@ article {
 .article-footer {
     display: flex;
     flex-direction: row-reverse;
-    margin-top: 30px;
+    margin-bottom: 24px;
+    position: absolute; /* 絕對定位 */
+    bottom: 0; /* 固定在 .post 的底部 */
+    right: 30px;
+}
+.article-content-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 24px;
+    position: absolute; /* 絕對定位 */
+    bottom: 0; /* 固定在 .post 的底部 */
+    right: 30px;
 }
 .article-footer a {
+    color: rgb(235, 235, 235);
+}
+.article-content-footer a {
     color: rgb(235, 235, 235);
 }
 .article-share-link {
