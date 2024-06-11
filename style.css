@@ -96,6 +96,9 @@ article {
     padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
     border-radius: 8px; /* 設置 aside 和 section 的圓角為 8px */
 }
+.profile-container {
+    flex: 1;
+}
 #profile {
     margin-right: 20px;
     flex: 1;
@@ -120,9 +123,6 @@ article.post-content {
     flex: 1;
     flex-direction: column;
     margin-left: 20px;
-}
-.profile-container{
-
 }
 .image {
     position:relative;
@@ -187,6 +187,7 @@ article.post-content {
     background-color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 94px;
 }
 .buttons .button:hover {
     background-color: rgb(128, 149, 173);
@@ -339,11 +340,20 @@ article.post-content {
 #tag-library .tags a {
     display: inline-block;
     text-decoration: none;
+    color: rgb(235, 235, 235);
+    font-size: 14px;
+    margin: 4px 8px 0px 0px;
 }
-
 #tag-library .tags a:hover {
     
 }
+section#post .categories_option a{
+    color: rgb(235, 235, 235);
+}
+section#post .categories_option a:visited{
+    color: rgb(235, 235, 235);
+}
+
 footer#footer {
     display: flex;
     justify-content: center;

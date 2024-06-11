@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-folder'></i>
-                                    <a href="#" class="article-category-link">筆記</a>
+                                    <a href="category_note.html" class="article-category-link">筆記</a>
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-purchase-tag'></i>
@@ -223,11 +223,11 @@ git push origin (新分支名稱)
                         </ul>
                     </aside>
                     <aside id="tag-library">
-                        <h3 class="tag-title">Tag</h3>
+                        <h3 class="tag-title">Tags</h3>
                         <div class="tags">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
+                            <a v-for="tag in tags" :key="tag.name" :href="tag.link">{{ tag.name }}</a>
                         </div>
+                    </aside>
                     </aside>
                 </div>
             </div>

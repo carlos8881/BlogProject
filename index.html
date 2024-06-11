@@ -60,7 +60,7 @@
                         <div class="analytics">
                             <div class="data">
                                 <i class='bx bxs-edit-alt'></i>
-                                <span class="number">10</span>
+                                <span id="postCount"></span>
                             </div>
                             <div class="data">
                                 <i class='bx bxs-message-dots' ></i>
@@ -73,6 +73,7 @@
                         </div>
                     </aside>
                 </div>
+
                 <section id="post">
                     <article class="posts">
                         <header class="article-header">
@@ -86,7 +87,7 @@
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-folder'></i>
-                                    <a href="#" class="article-category-link">筆記</a>
+                                    <a href="category_note.html" class="article-category-link">筆記</a>
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-purchase-tag'></i>
@@ -125,7 +126,7 @@
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-folder'></i>
-                                    <a href="#" class="article-category-link">筆記</a>
+                                    <a href="category_note.html" class="article-category-link">筆記</a>
                                 </div>
                                 <div class="article-category">
                                     <i class='bx bx-purchase-tag'></i>
@@ -133,7 +134,6 @@
                                 </div>
                             </div>
                         </header>
-                        
                         <div class="article-entry" itemprop="articleBody">
                             <p>使用流程 1. 登記使用者、信箱 2. 初始化 3. 將要更改的檔案加入暫存區 4. 檢查差異(可跳過) 5. 提交......
                                 </p>
@@ -152,6 +152,7 @@
                             </a>
                         </footer>
                     </article>
+
                     <article class="posts">
                         <header class="article-header">
                             <h1>
@@ -172,7 +173,6 @@
                                 </div>
                             </div>
                         </header>
-                        
                         <div class="article-entry" itemprop="articleBody">
                             <p> 
                                 1 <br>
@@ -214,7 +214,6 @@
                                 </div>
                             </div>
                         </header>
-                        
                         <div class="article-entry" itemprop="articleBody">
                             <p>
                                 關於我...... <br>
@@ -234,9 +233,9 @@
                                 Comments
                             </a>
                         </footer>
-                        
                     </article>
                 </section>
+
                 <div id="sidebar-container">
                     <aside class="sidebar">
                         <h3 class="widget-title">Categories</h3>
@@ -247,17 +246,32 @@
                         </ul>
                     </aside>
                     <aside id="tag-library">
-                        <h3 class="tag-title">Tag</h3>
+                        <h3 class="tag-title">Tags</h3>
                         <div class="tags">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
+                            <a v-for="tag in tags" :key="tag.name" :href="tag.link">{{ tag.name }}</a>
                         </div>
                     </aside>
                 </div>
             </div>
             <footer id="footer">© 2024 Carlos</footer>
+
         </main>
     </div>
     <script src="js/app.js"></script>
+    <script>
+        let posts = document.getElementsByTagName('article');
+        let numPosts = posts.length;
+        let profile = {
+            name: "Carlos",
+            image: "profile.jpg",
+            postCount: numPosts,
+        };
+        function updateProfile() {
+            document.querySelector('.name').innerText = profile.name;
+            document.querySelector('.profile-img').src = profile.image;
+            document.querySelector('#postCount').innerText = profile.postCount;
+        };
+        window.onload = updateProfile;
+    </script>
 </body>
 </html>
