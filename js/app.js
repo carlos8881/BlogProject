@@ -5,10 +5,10 @@ new Vue({
         name: 'Carlos',
         other: '**',
         links: [
-            { url: '#', style: 'background: #4267b2', icon: 'bx bxl-facebook' },
+            { url: 'https://www.facebook.com/profile.php?id=100000644585418', style: 'background: #4267b2', icon: 'bx bxl-facebook' },
             { url: '#', style: 'background: #1da1f2', icon: 'bx bxl-twitter' },
-            { url: '#', style: 'background: #f15589', icon: 'bx bxl-instagram-alt' },
-            { url: '#', style: 'background: #ff0000', icon: 'bx bxl-youtube' },
+            { url: 'https://www.instagram.com/rex199981/?hl=zh-tw', style: 'background: #f15589', icon: 'bx bxl-instagram-alt' },
+            { url: 'https://youtube.com/@carlos88801?si=qghoUwx-knT6ZfUm', style: 'background: #ff0000', icon: 'bx bxl-youtube' },
         ],
         message: 'Hello, world!',
         analytics: [
