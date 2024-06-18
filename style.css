@@ -299,6 +299,132 @@ article.post-content {
 .article-share-link {
     margin-left: 20px;
 }
+#comments{
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
+    padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
+    border-radius: 8px; /* 設置 aside 和 section 的圓角為 8px */
+}
+textarea#comment.comments-input-form-item-textarea{
+    color: rgb(235, 235, 235);
+    background-color:rgb(26, 26, 26);
+    font-size: 16px;
+    width: 660px;
+    height: 200px;
+    margin-bottom: 6px;
+    border: none;
+    padding: 10px;
+    outline: none;
+    resize: none;
+}
+.comments-input-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.comments-input-username{
+    align-self: center;
+    margin-left: 10px;
+}
+.comments-input-form-avatar {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.comments-input-form-avatar button {
+    margin-left: auto;
+}
+.comments-input-form-avatar img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.emoji-button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border: 0px;
+    border-radius: 28px;
+    background-color: rgb(40, 44, 46);
+}
+.comments-cancel-button {
+    width: 60px;
+    height: 36px;
+    font-size: 14px;
+    border: none;
+    border-radius: 28px;
+    color: rgb(235, 235, 235);
+    background-color: rgb(40, 44, 46);
+    margin-right: 4px;
+}
+.comments-cancel-button:hover {
+    background-color: rgb(77, 80, 82);
+}
+.emoji-and-submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.emoji-button:hover {
+    background-color: rgb(77, 80, 82);
+}
+.comments-submit-button {
+    width: 60px;
+    height: 36px;
+    font-size: 14px;
+    border: none;
+    border-radius: 28px;
+    color: rgb(235, 235, 235);
+    background-color: rgb(40, 44, 46);
+}
+.comments-submit-button:hover {
+    background-color: rgb(77, 80, 82);
+}
+/* 表情选择器样式 */
+#emoji-picker-container {
+    width: 350px; /* 调整为实际 emoji-picker 的宽度 */
+    height: 280px; /* 调整为实际 emoji-picker 的高度 */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+emoji-picker {
+    border: none;
+    max-width: 350px; /* 或根据您的布局需要调整宽度 */
+    max-height: 280px; /* 调整高度以适应页面布局 */
+    overflow-y: auto; /* 如果内容超出高度，允许滚动 */
+}
+.comments-content-item{
+    display: flex;
+    margin-bottom: 20px;
+}
+.comments-content-item-avatar img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comments-content-item-text {
+    margin-left: 14px;
+}
+.comments-content-item-text-header {
+    font-size: 16px;
+    color: rgb(235, 235, 235);
+    margin-bottom: 4px;
+}
+.comments-content-item-text-header-date {
+    font-size: 12px;
+    color: rgb(175, 175, 175)
+}
+.comments-content-item-text-content {
+    font-size: 14px;
+    color: rgb(235, 235, 235);
+}
 /* 设置侧边栏标题样式 */
 .widget-title {
     color: #ffffff; /* 设置标题颜色 */
@@ -344,16 +470,12 @@ article.post-content {
     font-size: 14px;
     margin: 4px 8px 0px 0px;
 }
-#tag-library .tags a:hover {
-    
-}
 section#post .categories_option a{
     color: rgb(235, 235, 235);
 }
 section#post .categories_option a:visited{
     color: rgb(235, 235, 235);
 }
-
 footer#footer {
     display: flex;
     justify-content: center;
