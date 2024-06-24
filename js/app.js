@@ -6,9 +6,9 @@ new Vue({
         other: '**',
         links: [
             { url: 'https://www.facebook.com/profile.php?id=100000644585418', style: 'background: #4267b2', icon: 'bx bxl-facebook' },
-            { url: '#', style: 'background: #1da1f2', icon: 'bx bxl-twitter' },
             { url: 'https://www.instagram.com/rex199981/?hl=zh-tw', style: 'background: #f15589', icon: 'bx bxl-instagram-alt' },
             { url: 'https://youtube.com/@carlos88801?si=qghoUwx-knT6ZfUm', style: 'background: #ff0000', icon: 'bx bxl-youtube' },
+            { url: 'https://github.com/carlos8881', style: 'background: rgb(0,0,0)', icon: 'bx bxl-github' },
         ],
         message: 'Hello, world!',
         analytics: [
@@ -73,42 +73,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    loadComments(); // 页面加载时获取留言
-
-    // 取消按钮功能
-    const cancelButton = document.querySelector('.comments-cancel-button');
-    cancelButton.addEventListener('click', function(event) {
-        event.preventDefault(); // 防止表单提交
-        document.getElementById('comment').value = ''; // 清空输入区内容
-    });
-
-    // 送出按钮功能
-    const submitButton = document.querySelector('.comments-submit-button');
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        const commentInput = document.getElementById('comment');
-        const commentText = commentInput.value.trim();
-
-        if (commentText) {
-            submitComment({ text: commentText, date: new Date().toLocaleDateString() });
-        }
-    });
-});
-
 function submitComment() {
     const commentInput = document.getElementById('comment');
     const commentText = commentInput.value;
     const user = firebase.auth().currentUser;
     if (commentText && user) {
+        const dateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
         const comment = {
-            text: commentText,
-            date: new Date().toISOString(),
-            username: user.displayName,
-            avatar: user.photoURL
+            guestComment: commentText,
+            dateTime: dateTime,
+            guestName: user.displayName,
+            guestAvatar: user.photoURL
         };
         fetch('http://localhost:3000/comments', {
             method: 'POST',
@@ -126,19 +102,21 @@ function submitComment() {
 }
 
 function loadComments() {
+    console.log('Loading comments...');
     fetch('http://localhost:3000/comments')
     .then(response => response.json())
     .then(comments => {
         const commentsContent = document.querySelector('.comments-content');
         commentsContent.innerHTML = ''; // 清空现有留言
         comments.forEach(comment => {
-            createCommentElement(comment.text, comment.date, comment.username, comment.avatar);
+            createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
         });
     })
     .catch(error => console.error('Error:', error));
 }
 
 
+// Initialize Firebase
 var firebaseConfig = {
     apiKey: "AIzaSyApCGitlToCu3oi_Owoi2cUqjpH1BPIEfY",
     authDomain: "carlosblogcomment.firebaseapp.com",
@@ -147,62 +125,63 @@ var firebaseConfig = {
     messagingSenderId: "445901511837",
     appId: "1:445901511837:web:c8eb760e3219f6e2dbc874",
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// 監聽用戶的登入狀態
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // 用戶已登入，可以獲取用戶信息
-    console.log(user);
-    updateUIForSignIn(user); // 更新UI為登入狀態
-  } else {
-    // 用戶未登入
-    updateUIForSignOut(); // 更新UI為登出狀態
-  }
-});
-
-function googleSignIn() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      // 登入成功後的處理
-      console.log(result.user);
-      // 更新UI，例如顯示用戶名稱和頭像
-    }).catch(function(error) {
-      // 處理錯誤
-      console.error(error);
-    });
-}
-
-// 綁定登入按鈕的點擊事件
-document.querySelector('.comments-input-form-avatar button').addEventListener('click', googleSignIn);
-
-function googleSignOut() {
-  firebase.auth().signOut().then(() => {
-    // Sign-out successful.
-    updateUIForSignOut();
-  }).catch((error) => {
-    // An error happened.
-    console.log(error.message);
-  });
-}
-
+// 登录成功后更新UI
 function updateUIForSignIn(user) {
     document.querySelector('.comments-input-username').textContent = user.displayName;
     document.querySelector('.comments-input-form-avatar img').src = user.photoURL;
-    const signInOutButton = document.getElementById('signInOutButton'); // 假設按鈕有一個 ID 為 'signInOutButton'
+    const signInOutButton = document.getElementById('signInOutButton');
     signInOutButton.textContent = '登出';
     signInOutButton.onclick = googleSignOut;
-  }
-  
-  function updateUIForSignOut() {
+}
+
+// 登出后更新UI
+function updateUIForSignOut() {
     document.querySelector('.comments-input-username').textContent = 'user';
     document.querySelector('.comments-input-form-avatar img').src = 'images/avatar.jpg';
-    const signInOutButton = document.getElementById('signInOutButton'); // 使用相同的 ID 選擇器
+    const signInOutButton = document.getElementById('signInOutButton');
     signInOutButton.textContent = '登入';
     signInOutButton.onclick = googleSignIn;
-  }
+}
 
+// 使用Google账号登录
+function googleSignIn() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result.user);
+        updateUIForSignIn(result.user);
+    }).catch(function(error) {
+        console.error(error);
+    });
+}
+
+// 登出
+function googleSignOut() {
+    firebase.auth().signOut().then(() => {
+        updateUIForSignOut();
+    }).catch((error) => {
+        console.log(error.message);
+    });
+}
+
+// 监听用户的登录状态
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log(user);
+        updateUIForSignIn(user);
+    } else {
+        updateUIForSignOut();
+    }
+});
+
+// 绑定登录按钮的点击事件
+document.querySelector('.comments-input-form-avatar button').addEventListener('click', googleSignIn);
+
+// 绑定提交评论按钮的点击事件
+document.getElementById('submitComment').addEventListener('click', function() {
+    submitComment(); // 调用发送留言到数据库的函数
+});
 // 初始時嘗試綁定登入按鈕的點擊事件可能不需要，因為onAuthStateChanged將處理UI更新
 // document.querySelector('button').onclick = googleSignIn;
 
@@ -210,28 +189,98 @@ function createCommentElement(text, date, username, avatar) {
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
 
+    const guestAvatarElement = document.createElement('div');
+    commentElement.classList.add('guest-avatar');
+
+    const guestInformationAndCommentElement = document.createElement('div');
+    commentElement.classList.add('guest-informationAndComment');
+
+    const guestInformationElement = document.createElement('div');
+    commentElement.classList.add('guest-information');
+
+    const guestCommentsContentElement = document.createElement('div');
+    commentElement.classList.add('guest-comments-content');
+
     const avatarElement = document.createElement('img');
     avatarElement.src = avatar;
     avatarElement.alt = 'User Avatar';
-    avatarElement.classList.add('comment-avatar');
+    avatarElement.classList.add('guest-avatar');
 
-    const usernameElement = document.createElement('h5');
+    const usernameElement = document.createElement('span');
     usernameElement.textContent = username;
-    usernameElement.classList.add('comment-username');
+    usernameElement.classList.add('guest-name');
 
     const dateElement = document.createElement('span');
     dateElement.textContent = date;
-    dateElement.classList.add('comment-date');
+    dateElement.classList.add('guest-date');
 
     const textElement = document.createElement('p');
     textElement.textContent = text;
-    textElement.classList.add('comment-text');
+    textElement.classList.add('guest-comments-content');
 
     commentElement.appendChild(avatarElement);
-    commentElement.appendChild(usernameElement);
-    commentElement.appendChild(dateElement);
-    commentElement.appendChild(textElement);
+    commentElement.appendChild(guestInformationAndCommentElement);
+    guestInformationAndCommentElement.appendChild(guestInformationElement);
+    guestInformationAndCommentElement.appendChild(textElement);
+    guestInformationElement.appendChild(usernameElement);
+    guestInformationElement.appendChild(dateElement);
 
     const commentsContainer = document.querySelector('.comments-content');
     commentsContainer.appendChild(commentElement);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document is fully loaded and parsed, but not necessarily all subresources');
+    loadComments(); // 在頁面加載完成時加載留言
+});
+
+// const mysql = require('mysql');
+
+// // 创建数据库连接
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'yourUsername',
+//     password: 'yourPassword',
+//     database: 'yourDatabaseName'
+// });
+
+// // 尝试连接数据库
+// db.connect(err => {
+//     if (err) {
+//         // 连接失败，处理错误
+//         console.error('数据库连接失败:', err);
+//         // 根据错误类型执行相应操作，例如重试连接或退出程序
+//     } else {
+//         console.log('成功连接到数据库');
+//         // 连接成功，执行后续操作
+//     }
+// });
+
+// // 使用Promise封装连接逻辑
+// function connectToDatabase() {
+//     return new Promise((resolve, reject) => {
+//         db.connect(err => {
+//             if (err) {
+//                 reject(err);
+//             } else {
+//                 resolve('成功连接到数据库');
+//             }
+//         });
+//     });
+// }
+
+// // 使用async/await调用
+// async function main() {
+//     try {
+//         const message = await connectToDatabase();
+//         console.log(message);
+//         // 执行数据库操作
+//     } catch (err) {
+//         console.error('连接数据库时发生错误:', err);
+//         // 处理错误
+//     } finally {
+//         db.end(); // 无论成功还是失败，都关闭数据库连接
+//     }
+// }
+
+// main();

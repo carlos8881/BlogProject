@@ -249,7 +249,6 @@ article.post-content {
     color: rgb(235, 235, 235);
 }
 .article-entry {
-    margin-top: 10px;
     margin-bottom: 30px;
 }
 .article-more-link {
@@ -277,18 +276,10 @@ article.post-content {
 .article-footer {
     display: flex;
     flex-direction: row-reverse;
-    margin-bottom: 24px;
-    position: absolute; /* 絕對定位 */
-    bottom: 0; /* 固定在 .post 的底部 */
-    right: 30px;
 }
 .article-content-footer {
     display: flex;
     flex-direction: row-reverse;
-    margin-bottom: 24px;
-    position: absolute; /* 絕對定位 */
-    bottom: 0; /* 固定在 .post 的底部 */
-    right: 30px;
 }
 .article-footer a {
     color: rgb(235, 235, 235);
@@ -351,6 +342,19 @@ textarea#comment.comments-input-form-item-textarea{
     border-radius: 28px;
     background-color: rgb(40, 44, 46);
 }
+button#signInOutButton{
+    width: 60px;
+    height: 36px;
+    font-size: 14px;
+    border: none;
+    border-radius: 28px;
+    color: rgb(235, 235, 235);
+    background-color: rgb(40, 44, 46);
+    margin-right: 4px;
+}
+button#signInOutButton:hover {
+    background-color: rgb(77, 80, 82);
+}
 .comments-cancel-button {
     width: 60px;
     height: 36px;
@@ -402,6 +406,32 @@ emoji-picker {
 .comments-content-item{
     display: flex;
     margin-bottom: 20px;
+}
+.comments-content .comment {
+    display: flex;
+    margin-bottom: 20px;
+}
+.comments-content .comment img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comments-content .comment .guest-name{
+    font-size: 16px;
+    color: rgb(235, 235, 235);
+    margin-left: 14px;
+}
+.comments-content .comment .guest-date{
+    font-size: 12px;
+    color: rgb(175, 175, 175);
+    margin-left: 10px;
+}
+.comments-content .comment .guest-comments-content{
+    font-size: 14px;
+    color: rgb(235, 235, 235);
+    margin-left: 14px;
+
 }
 .comments-content-item-avatar img{
     height: 40px;

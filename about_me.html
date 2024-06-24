@@ -9,23 +9,15 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="module" src="https://unpkg.com/emoji-picker-element"></script>
-    <!-- 移除這些舊版本的Firebase SDK -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script> -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script> -->
-
     <!-- 使用Firebase 9+的SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
-
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyApCGitlToCu3oi_Owoi2cUqjpH1BPIEfY",
             authDomain: "carlosblogcomment.firebaseapp.com",
@@ -35,10 +27,11 @@
             appId: "1:445901511837:web:c8eb760e3219f6e2dbc874",
             measurementId: "G-N0RFZX5X8C"
         };
-      
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+        // Initialize Firestore
+        const db = getFirestore(app);
     </script>
 </head>
 <body>
@@ -141,28 +134,24 @@
                                     </div>
                                     <div class="submit-group">
                                         <button class="comments-cancel-button">取消</button>
-                                        <button class="comments-submit-button">送出</button>
+                                        <button id="submitComment" class="comments-submit-button">送出</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="comments-content">
                             <div class="comments-content-item">
-                                <div class="comments-content-item-avatar">
-                                    <img src="images/avatar.jpg" alt=""></img>
-                                </div>
                                 <div class="comments-content-item-text">
                                     <div class="comments-content-item-text-header">
-                                        <span class="comments-content-item-text-header-name">user</span>
-                                        <span class="comments-content-item-text-header-date">2024-06-13</span>
+                                        <span class="comments-content-item-text-header-name"></span>
+                                        <span class="comments-content-item-text-header-date"></span>
                                     </div>
                                     <div class="comments-content-item-text-content">
-                                        <p>這是一則留言</p>
+                                        <p>留言區伺服器暫停運作</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="comments-footer"></div>
+                        </div> <!--留言區-->
                     </section>
                 </section>
                 <div id="sidebar-container">
