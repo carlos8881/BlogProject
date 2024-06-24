@@ -12,7 +12,7 @@
         <div id="app">
         <header>
             <div class="top">
-                <h1><a href="/">Carlos Blog</a></h1>
+                <h1><a href="index.html">Carlos Blog</a></h1>
             </div>
             <div class="menu">
                 <ul>
@@ -84,6 +84,50 @@
                             </a>
                         </footer>
                     </article>
+                    <section id="comments">
+                        <div class="comments-header">
+                            <div class="comments-count">
+                                <span id="commentCount">0</span>則留言
+                            </div>
+                        </div>
+                        <div class="comments-input-container">
+                            <form action="#" class="comments-input-form">
+                                <div class="comments-input-form-avatar">
+                                    <img src="images/avatar.jpg" alt=""></img>
+                                    <span class="comments-input-username">user</span>
+                                    <button id="signInOutButton">登入</button>
+                                </div>
+                                <div class="comments-input-form-item"></div>
+                                <textarea name="comment" id="comment" class="comments-input-form-item-textarea" placeholder="登入後發表留言..."></textarea>
+                                <div class="emoji-and-submit">
+                                    <button class="emoji-button">😄</button>
+                                    <div id="emoji-picker-container" style="position: absolute; bottom: 0px; right: 0px; display: none;">
+                                        <emoji-picker></emoji-picker>
+                                    </div>
+                                    <div class="submit-group">
+                                        <button class="comments-cancel-button">取消</button>
+                                        <button id="submitComment" class="comments-submit-button">送出</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="comments-content">
+                            <div class="comments-content-item">
+                                <div class="comments-content-item-avatar">
+                                    <img src="images/avatar.jpg" alt=""></img>
+                                </div>
+                                <div class="comments-content-item-text">
+                                    <div class="comments-content-item-text-header">
+                                        <span class="comments-content-item-text-header-name">user</span>
+                                        <span class="comments-content-item-text-header-date">2024-06-13</span>
+                                    </div>
+                                    <div class="comments-content-item-text-content">
+                                        <p>這是一則留言</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </section>
                 <div id="sidebar-container">
                     <aside class="sidebar">
