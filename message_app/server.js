@@ -7,12 +7,14 @@ const app = express();
 const port = 3000;
 
 //cd F:\WebProject1_202405\message_app
+//cd C:\Program Files\MySQL\MySQL Server 8.0\bin
 // 保留的MySQL连接配置
+//mysql -h carlosblogdatabase.c7usy6yuubcb.ap-northeast-1.rds.amazonaws.com -u admin -p carlosblogdatabase < comments_db.sql
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'newuser', // 替换为您的 MySQL 用户名
-    password: 'Boyqrex123', // 替换为您的 MySQL 密码
-    database: 'comments_db'
+    host: 'carlosblogdatabase.c7usy6yuubcb.ap-northeast-1.rds.amazonaws.com', // RDS实例的终端节点
+    user: 'admin', // RDS数据库的主用户名
+    password: 'Boyqrex123', // RDS数据库的密码
+    database: 'carlosblogdatabase'
 });
 
 // 连接数据库
