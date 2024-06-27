@@ -17,8 +17,10 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: false
-});  
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 // 连接数据库
 pool.connect((err, client, release) => {
