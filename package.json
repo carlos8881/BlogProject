@@ -2,7 +2,7 @@
   "name": "myblogcomment",
   "version": "1.0.0",
   "description": "A simple comment system for my blog",
-  "main": "app.js",
+  "main": "message_app/server.js",
   "scripts": {
     "start": "node app.js"
   },
