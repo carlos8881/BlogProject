@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
@@ -10,40 +11,56 @@ const port = 3000;
 //cd C:\Program Files\MySQL\MySQL Server 8.0\bin
 // 保留的MySQL连接配置
 //mysql -h carlosblogdatabase.c7usy6yuubcb.ap-northeast-1.rds.amazonaws.com -u admin -p carlosblogdatabase < comments_db.sql
-const db = mysql.createConnection({
-    host: 'carlosblogdatabase.c7usy6yuubcb.ap-northeast-1.rds.amazonaws.com', // RDS实例的终端节点
-    user: 'admin', // RDS数据库的主用户名
-    password: 'Boyqrex123', // RDS数据库的密码
-    database: 'carlosblogdatabase'
-});
+const fs = require('fs');
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // 添加這行來禁用 SSL 驗證
+  }
+});  
 
 // 连接数据库
-db.connect((err) => {
-    if (err) throw err;
-    console.log('Connected to database');
-});
+pool.connect((err, client, release) => {
+    if (err) {
+      console.error('Error acquiring client', err.stack);
+    } else {
+      console.log('Database connected successfully');
+      client.release();
+    }
+  });
+  
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/comments', (req, res) => {
-    const comment = req.body;
-    db.query('INSERT INTO comments SET ?', comment, (err, result) => {
-        if (err) throw err;
+app.post('/comments', async (req, res) => {
+    const { guestComment, dateTime, guestName, guestAvatar } = req.body;
+    try {
+        console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar });
+        const result = await pool.query(
+            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar) VALUES ($1, $2, $3, $4)',
+            [guestComment, dateTime, guestName, guestAvatar]
+        );
+        console.log('Insert result:', result);
         res.status(201).send();
-    });
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error inserting comment');
+    }
 });
 
-app.get('/comments', (req, res) => {
-    db.query('SELECT * FROM comments', (err, results) => {
-        if (err) {
-            console.error('Error fetching comments:', err);
-            res.status(500).send('Error fetching comments');
-        } else {
-            res.json(results);
-        }
-    });
+app.get('/comments', async (req, res) => {
+    try {
+        const results = await pool.query('SELECT * FROM comments');
+        res.json(results.rows);
+    } catch (err) {
+        console.error('Error fetching comments:', err);
+        res.status(500).send('Error fetching comments');
+    }
 });
+
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
