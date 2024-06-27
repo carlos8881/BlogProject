@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 //cd F:\WebProject1_202405\message_app
 //cd C:\Program Files\MySQL\MySQL Server 8.0\bin
@@ -16,9 +17,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false // 添加這行來禁用 SSL 驗證
-  }
+  ssl: false
 });  
 
 // 连接数据库
