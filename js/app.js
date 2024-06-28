@@ -86,7 +86,7 @@ function submitComment() {
             guestName: user.displayName,
             guestAvatar: user.photoURL
         };
-        fetch('http://localhost:3000/comments', {
+        fetch('https://myblogcomment.herokuapp.com/comments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function submitComment() {
 
 function loadComments() {
     console.log('Loading comments...');
-    fetch('http://localhost:3000/comments')
+    fetch('https://myblogcomment.herokuapp.com/comments')
     .then(response => response.json())
     .then(comments => {
         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
