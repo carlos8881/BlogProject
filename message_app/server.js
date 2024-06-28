@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -9,9 +8,6 @@ const port = 3000;
 const PORT = process.env.PORT || 3000;
 
 //cd F:\WebProject1_202405\message_app
-//cd C:\Program Files\MySQL\MySQL Server 8.0\bin
-// 保留的MySQL连接配置
-//mysql -h carlosblogdatabase.c7usy6yuubcb.ap-northeast-1.rds.amazonaws.com -u admin -p carlosblogdatabase < comments_db.sql
 const fs = require('fs');
 const { Pool } = require('pg');
 
@@ -53,17 +49,20 @@ app.post('/comments', async (req, res) => {
 });
 
 app.get('/comments', async (req, res) => {
-    try {
-        const results = await pool.query('SELECT * FROM comments');
-        res.json(results.rows);
-    } catch (err) {
-        console.error('Error fetching comments:', err);
-        res.status(500).send('Error fetching comments');
-    }
-});
-
-app.get('/', (req, res) => {
-  res.send('Welcome to my blog comments app!');
+  try {
+      const results = await pool.query('SELECT * FROM comments');
+      // 确保这里的字段名与数据库中的字段名一致
+      const comments = results.rows.map(row => ({
+          guestComment: row.guestcomment,
+          dateTime: row.datetime,
+          guestName: row.guestname,
+          guestAvatar: row.guestavatar
+      }));
+      res.json(comments);
+  } catch (err) {
+      console.error('Error fetching comments:', err);
+      res.status(500).send('Error fetching comments');
+  }
 });
 
 app.listen(PORT, () => {

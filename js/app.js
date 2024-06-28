@@ -106,6 +106,7 @@ function loadComments() {
     fetch('http://localhost:3000/comments')
     .then(response => response.json())
     .then(comments => {
+        console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
         const commentsContent = document.querySelector('.comments-content');
         commentsContent.innerHTML = ''; // 清空现有留言
         comments.forEach(comment => {
