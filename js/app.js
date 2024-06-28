@@ -86,7 +86,7 @@ function submitComment() {
             guestName: user.displayName,
             guestAvatar: user.photoURL
         };
-        fetch('https://myblogcomment.herokuapp.com/comments', {
+        fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function submitComment() {
 
 function loadComments() {
     console.log('Loading comments...');
-    fetch('https://myblogcomment.herokuapp.com/comments')
+    fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
     .then(response => response.json())
     .then(comments => {
         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
