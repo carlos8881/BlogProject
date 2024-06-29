@@ -29,15 +29,21 @@ new Vue({
         ]
     }
 });
-//檢查是否在首頁
-document.addEventListener('DOMContentLoaded', function() {
-    const pathname = window.location.pathname;
-    const isHomepage = pathname === '/' || pathname === '/index.html';
-    // 如果在首页，则停止执行后续代码
-    if (isHomepage) {
-        return;
-    }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // 选择所有评论链接
+        const commentLinks = document.querySelectorAll('.article-comment-link');
+        // 为每个评论链接添加点击事件监听器
+        commentLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // 阻止默认的链接行为
+                // 获取当前文章的链接
+                const articleUrl = link.closest('.posts').querySelector('.article-header-a').href;
+                // 构建并重定向到评论部分
+                window.location.href = `${articleUrl}#comments`;
+            });
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         const emojiButton = document.querySelector('.emoji-button');
         const emojiPickerContainer = document.getElementById('emoji-picker-container');
@@ -262,18 +268,4 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error copying text: ', err);
         });
     });
-});
-    document.addEventListener('DOMContentLoaded', function() {
-        // 选择所有评论链接
-        const commentLinks = document.querySelectorAll('.article-comment-link');
-        // 为每个评论链接添加点击事件监听器
-        commentLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // 阻止默认的链接行为
-                // 获取当前文章的链接
-                const articleUrl = link.closest('.posts').querySelector('.article-header-a').href;
-                // 构建并重定向到评论部分
-                window.location.href = `${articleUrl}#comments`;
-            });
-        });
-    });
+
