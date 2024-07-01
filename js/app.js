@@ -12,9 +12,25 @@ new Vue({
         ],
         message: 'Hello, world!',
         analytics: [
-            { icon: 'bx bxs-edit-alt', count: 99 },
-            { icon: 'bx bxs-message-dots', count: 99 },
+            { icon: 'bx bxs-edit-alt', count: 4 },
+            { icon: 'bx bxs-message-dots', count: 0 },
         ],
+    },
+    methods: {
+        fetchComments: function() {
+            // 從資料庫取得留言的函數
+            fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
+                .then(response => response.json())
+                .then(comments => {
+                    // 假設留言數量對應於 analytics 數組中的第二個項目
+                    this.analytics[1].count = comments.length; // 更新留言數量
+                    // 處理取得的留言數據...
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    },
+    mounted: function() {
+        this.fetchComments(); // 組件掛載後立即取得留言
     }
 });
 
@@ -42,14 +58,21 @@ new Vue({
     },
     methods: {
         fetchComments: function() {
-            // 從資料庫取得留言的函數
-            fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
-                .then(response => response.json())
-                .then(comment => {
-                    this.commentCount = comment.length; // 更新留言數量
-                    // 處理取得的留言數據...
-                })
-                .catch(error => console.error('Error:', error));
+            // 獲取當前頁面的 URL
+            const currentPageUrl = window.location.pathname;
+            // 添加查詢參數到請求 URL
+            console.log('Current Page URL:', currentPageUrl);
+            const requestUrl = `https://myblogcomment-5194e71c8b5e.herokuapp.com/comments?pageId=${currentPageUrl}`;
+            console.log('Request URL:', requestUrl);
+            fetch(requestUrl)
+            .then(response => response.json())
+            .then(comments => {
+                // 假設每條留言都有一個 pageId 屬性，並且後端返回的是所有留言的數組
+                const filteredComments = comments.filter(comment => comment.pageId === currentPageUrl);
+                this.commentCount = filteredComments.length; // 更新留言數量為篩選後的結果
+                // 處理取得的留言數據...
+            })
+            .catch(error => console.error('Error:', error));
         }
     },
     mounted: function() {
@@ -153,30 +176,14 @@ new Vue({
             const currentPageId = window.location.pathname; // 获取当前页面的 URL 路径
             const commentsContent = document.querySelector('.comments-content');
             commentsContent.innerHTML = ''; // 清空现有留言
-            // 过滤出 page_id 与当前页面 URL 匹配的评论
-            const filteredComments = comments.filter(comment => comment.page_id === currentPageId);
+            // 过滤出 pageId 与当前页面 URL 匹配的评论
+            const filteredComments = comments.filter(comment => comment.pageId === currentPageId);
             filteredComments.forEach(comment => {
                 createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
             });
         })
         .catch(error => console.error('Error:', error));
     }
-
-    // function loadComments() {
-    //     console.log('Loading comments...');
-    //     fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
-    //     .then(response => response.json())
-    //     .then(comments => {
-    //         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
-    //         const commentsContent = document.querySelector('.comments-content');
-    //         commentsContent.innerHTML = ''; // 清空现有留言
-    //         comments.forEach(comment => {
-    //             createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
-    //         });
-    //     })
-    //     .catch(error => console.error('Error:', error));
-    // }
-
 
     // Initialize Firebase
     var firebaseConfig = {
@@ -315,13 +322,3 @@ new Vue({
             console.error('Error copying text: ', err);
         });
     });
-
-
-    // CREATE TABLE blog_comments (
-    //     id SERIAL PRIMARY KEY,
-    //     guestComment TEXT NOT NULL,
-    //     dateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    //     guestName TEXT,
-    //     guestAvatar TEXT,
-    //     page_id TEXT NOT NULL
-    // );

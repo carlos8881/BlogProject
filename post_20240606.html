@@ -3,10 +3,36 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" contnet="width=device-width, initial-scale=1.0">
-        <title>Carlos Blog</title>
+        <title>ChatGPT 技巧筆記 - Carlos Blog</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://unpkg.com/emoji-picker-element/dist/emoji-picker-element.css" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script type="module" src="https://unpkg.com/emoji-picker-element"></script>
+        <!-- 使用Firebase 9+的SDK -->
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyApCGitlToCu3oi_Owoi2cUqjpH1BPIEfY",
+                authDomain: "carlosblogcomment.firebaseapp.com",
+                projectId: "carlosblogcomment",
+                storageBucket: "carlosblogcomment.appspot.com",
+                messagingSenderId: "445901511837",
+                appId: "1:445901511837:web:c8eb760e3219f6e2dbc874",
+                measurementId: "G-N0RFZX5X8C"
+            };
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            // Initialize Firestore
+            const db = getFirestore(app);
+        </script>
     </head>
     <body>
         <div id="app">
@@ -178,16 +204,49 @@ git push origin (新分支名稱)
                             </pre>
                         </div>
                         <footer class="article-content-footer">
-                            <a href="#" data-id="" class="article-share-link">
-                                <i class='bx bx-share' ></i>
-                                Share
-                            </a>
-                            <a href="#" class="article-comment-link">
-                                <i class='bx bx-message-rounded-dots' ></i>
-                                Comments
+                            <a href="" data-id="" id="copybutton-article" class="article-copy-link">
+                                <i class='bx bx-copy'></i>
+                                CopyLink
                             </a>
                         </footer>
                     </article>
+                    <section id="comments">
+                        <div class="comments-header">
+                            <div class="comments-count">
+                                <span id="commentCount">{{ commentCount }}</span>則留言
+                            </div>
+                        </div>
+                        <div class="comments-input-container">
+                            <form action="#" class="comments-input-form">
+                                <div class="comments-input-form-avatar">
+                                    <img src="images/avatar.jpg" alt=""></img>
+                                    <span class="comments-input-username">user</span>
+                                    <button id="signInOutButton">登入</button>
+                                </div>
+                                <div class="comments-input-form-item"></div>
+                                <textarea name="comment" id="comment" placeholder="登入後發表留言..."></textarea>
+                                <div class="emoji-and-submit">
+                                    <button class="emoji-button">😄</button>
+                                    <div id="emoji-picker-container" style="position: absolute; bottom: 0px; right: 0px; display: none;">
+                                        <emoji-picker></emoji-picker>
+                                    </div>
+                                    <div class="submit-group">
+                                        <button class="comments-cancel-button">取消</button>
+                                        <button id="submitComment" class="comments-submit-button">送出</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="comments-content">
+                            <div class="comments-content-item">
+                                <div class="comments-content-item-text">
+                                    <div class="comment">
+                                        <p>留言區讀取中或伺服器已暫停運作</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--留言區-->
+                    </section>
                 </section>
                 <div class="sidebar-container" id="siderApp">
                     <aside class="sidebar">
