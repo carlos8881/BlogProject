@@ -32,43 +32,38 @@ pool.connect((err, client, release) => {
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.post('/comments', async (req, res) => {
-//     const { guestComment, dateTime, guestName, guestAvatar, pageId } = req.body;
-//     if (!pageId) {
-//         return res.status(400).send('pageId is required');
-//     }
-//     // 假设的处理逻辑
-//     try {
-//         console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar, pageId});
-//         const result = await pool.query(
-//             'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar, pageid) VALUES ($1, $2, $3, $4, $5)',
-//             [guestComment, dateTime, guestName, guestAvatar, pageId]
-//         );
-//         console.log('Insert result:', result);
-//         res.status(201).send();
-//     } catch (err) {
-//         console.error('Error:', err);
-//         res.status(500).send('Error inserting comment');
-//     }
-// });
+app.post('/comments', async (req, res) => {
+    const { guestComment, dateTime, guestName, guestAvatar } = req.body;
+    try {
+        console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar });
+        const result = await pool.query(
+            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar) VALUES ($1, $2, $3, $4)',
+            [guestComment, dateTime, guestName, guestAvatar]
+        );
+        console.log('Insert result:', result);
+        res.status(201).send();
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error inserting comment');
+    }
+});
 
-// app.get('/comments', async (req, res) => {
-//   try {
-//       const results = await pool.query('SELECT * FROM comments');
-//       // 确保这里的字段名与数据库中的字段名一致
-//       const comments = results.rows.map(row => ({
-//           guestComment: row.guestcomment,
-//           dateTime: row.datetime,
-//           guestName: row.guestname,
-//           guestAvatar: row.guestavatar,
-//           pageId: row.pageid
-//       }));
-//       res.json(comments);
-//   } catch (err) {
-//       console.error('Error fetching comments:', err);
-//       res.status(500).send('Error fetching comments');
-//   }
-// });
+app.get('/comments', async (req, res) => {
+  try {
+      const results = await pool.query('SELECT * FROM comments');
+      // 确保这里的字段名与数据库中的字段名一致
+      const comments = results.rows.map(row => ({
+          guestComment: row.guestcomment,
+          dateTime: row.datetime,
+          guestName: row.guestname,
+          guestAvatar: row.guestavatar
+      }));
+      res.json(comments);
+  } catch (err) {
+      console.error('Error fetching comments:', err);
+      res.status(500).send('Error fetching comments');
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
