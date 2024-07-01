@@ -33,12 +33,12 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/comments', async (req, res) => {
-    const { guestComment, dateTime, guestName, guestAvatar } = req.body;
+    const { guestComment, dateTime, guestName, guestAvatar, pageId } = req.body;
     try {
-        console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar });
+        console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar, pageId });
         const result = await pool.query(
-            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar) VALUES ($1, $2, $3, $4)',
-            [guestComment, dateTime, guestName, guestAvatar]
+            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar, pageId) VALUES ($1, $2, $3, $4)',
+            [guestComment, dateTime, guestName, guestAvatar, pageId]
         );
         console.log('Insert result:', result);
         res.status(201).send();
@@ -56,7 +56,8 @@ app.get('/comments', async (req, res) => {
           guestComment: row.guestcomment,
           dateTime: row.datetime,
           guestName: row.guestname,
-          guestAvatar: row.guestavatar
+          guestAvatar: row.guestavatar,
+          pageId: row.pageid
       }));
       res.json(comments);
   } catch (err) {
