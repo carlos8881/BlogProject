@@ -35,7 +35,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div>
         <header>
             <div class="top">
                 <h1><a href="/">Carlos Blog</a></h1>
@@ -53,7 +53,7 @@
         </header>
         <main>
             <div class="outer">
-                <div class="profile-container">
+                <div class="profile-container" id="profileApp">
                     <aside id="profile">
                         <div class="image">
                             <img :src="image" alt="photo-me" class="profile-img">
@@ -111,7 +111,7 @@
                     <section id="comments">
                         <div class="comments-header">
                             <div class="comments-count">
-                                <span id="commentCount">0</span>則留言
+                                <span id="commentCount">{{ commentCount }}</span>則留言
                             </div>
                         </div>
                         <div class="comments-input-container">
@@ -122,7 +122,7 @@
                                     <button id="signInOutButton">登入</button>
                                 </div>
                                 <div class="comments-input-form-item"></div>
-                                <textarea name="comment" id="comment" class="comments-input-form-item-textarea" placeholder="登入後發表留言..."></textarea>
+                                <textarea name="comment" id="comment" placeholder="登入後發表留言..."></textarea>
                                 <div class="emoji-and-submit">
                                     <button class="emoji-button">😄</button>
                                     <div id="emoji-picker-container" style="position: absolute; bottom: 0px; right: 0px; display: none;">
@@ -138,11 +138,7 @@
                         <div class="comments-content">
                             <div class="comments-content-item">
                                 <div class="comments-content-item-text">
-                                    <div class="comments-content-item-text-header">
-                                        <span class="comments-content-item-text-header-name"></span>
-                                        <span class="comments-content-item-text-header-date"></span>
-                                    </div>
-                                    <div class="comments-content-item-text-content">
+                                    <div class="comment">
                                         <p>留言區讀取中或伺服器已暫停運作</p>
                                     </div>
                                 </div>
@@ -150,7 +146,7 @@
                         </div> <!--留言區-->
                     </section>
                 </section>
-                <div id="sidebar-container">
+                <div class="sidebar-container" id="siderApp">
                     <aside class="sidebar">
                         <h3 class="widget-title">Categories</h3>
                         <ul class="category-list">

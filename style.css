@@ -118,7 +118,7 @@ article.post-content {
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
-#sidebar-container {
+.sidebar-container {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -313,7 +313,7 @@ article.post-content {
     padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
     border-radius: 8px; /* 設置 aside 和 section 的圓角為 8px */
 }
-textarea#comment.comments-input-form-item-textarea{
+textarea#comment {
     color: rgb(235, 235, 235);
     background-color:rgb(26, 26, 26);
     font-size: 16px;

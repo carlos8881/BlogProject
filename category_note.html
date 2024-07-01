@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
-    <div id="app">
+    <div>
         <header>
             <div class="top">
                 <h1><a href="/">Carlos Blog</a></h1>
@@ -27,7 +27,7 @@
         </header>
         <main>
             <div class="outer">
-                <div class="profile-container">
+                <div class="profile-container" id="profileApp">
                     <aside id="profile">
                         <div class="image">
                             <img :src="image" alt="photo-me" class="profile-img">
@@ -54,7 +54,7 @@
                         <li class="categories_option"><a href="post_20240605.html">Git指令筆記</a></li>
                     </article>
                 </section>
-                <div id="sidebar-container">
+                <div class="sidebar-container" id="siderApp">
                     <aside class="sidebar">
                         <h3 class="widget-title">Categories</h3>
                         <ul class="category-list">

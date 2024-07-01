@@ -1,9 +1,9 @@
 new Vue({
-    el: '#app',
+    el: '#profileApp',
     data: {
         image: 'profile.jpg',
         name: 'Carlos',
-        other: '**',
+        other: 'Hello, world!',
         links: [
             { url: 'https://www.facebook.com/profile.php?id=100000644585418', style: 'background: #4267b2', icon: 'bx bxl-facebook' },
             { url: 'https://www.instagram.com/rex199981/?hl=zh-tw', style: 'background: #f15589', icon: 'bx bxl-instagram-alt' },
@@ -12,10 +12,15 @@ new Vue({
         ],
         message: 'Hello, world!',
         analytics: [
-            { icon: 'bx bxs-edit-alt', count: 4 },
-            { icon: 'bx bxs-message-dots', count: 0 },
-            { icon: 'bx bxs-share', count: 0 },
+            { icon: 'bx bxs-edit-alt', count: 99 },
+            { icon: 'bx bxs-message-dots', count: 99 },
         ],
+    }
+});
+
+new Vue({
+    el: '#siderApp',
+    data: {
         categories: [
             { name: '筆記', link: 'category_note.html' },
             { name: '自傳', link: '#' },
@@ -27,6 +32,28 @@ new Vue({
             { name: '筆記', link: '#' },
             { name: '自傳', link: '#' },
         ]
+    }
+});
+
+new Vue({
+    el: '#commentCount',
+    data: {
+        commentCount: 0, // 初始留言數量設為0
+    },
+    methods: {
+        fetchComments: function() {
+            // 從資料庫取得留言的函數
+            fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
+                .then(response => response.json())
+                .then(comment => {
+                    this.commentCount = comment.length; // 更新留言數量
+                    // 處理取得的留言數據...
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    },
+    mounted: function() {
+        this.fetchComments(); // 組件掛載後立即取得留言
     }
 });
 
@@ -90,11 +117,13 @@ new Vue({
     function submitComment() {
         const commentInput = document.getElementById('comment');
         const commentText = commentInput.value;
-        const user = firebase.auth().currentUser;
+        const user = firebase.auth().currentUser; 
         if (commentText && user) {
             const dateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+            const pageId = window.location.pathname;
+            console.log('pageId',pageId);
             const comment = {
+                pageId: pageId,
                 guestComment: commentText,
                 dateTime: dateTime,
                 guestName: user.displayName,
@@ -114,6 +143,24 @@ new Vue({
             .catch(error => console.error('Error:', error));
         }
     }
+
+    // function loadComments() {
+    //     console.log('Loading comments...');
+    //     fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
+    //     .then(response => response.json())
+    //     .then(comments => {
+    //         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
+    //         const currentPageId = window.location.pathname; // 获取当前页面的 URL 路径
+    //         const commentsContent = document.querySelector('.comments-content');
+    //         commentsContent.innerHTML = ''; // 清空现有留言
+    //         // 过滤出 page_id 与当前页面 URL 匹配的评论
+    //         const filteredComments = comments.filter(comment => comment.page_id === currentPageId);
+    //         filteredComments.forEach(comment => {
+    //             createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
+    //         });
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    // }
 
     function loadComments() {
         console.log('Loading comments...');
@@ -205,16 +252,16 @@ new Vue({
         commentElement.classList.add('comment');
 
         const guestAvatarElement = document.createElement('div');
-        commentElement.classList.add('guest-avatar');
+        guestAvatarElement.classList.add('guest-avatar');
 
         const guestInformationAndCommentElement = document.createElement('div');
-        commentElement.classList.add('guest-informationAndComment');
+        guestInformationAndCommentElement.classList.add('guest-informationAndComment');
 
         const guestInformationElement = document.createElement('div');
-        commentElement.classList.add('guest-information');
+        guestInformationElement.classList.add('guest-information');
 
         const guestCommentsContentElement = document.createElement('div');
-        commentElement.classList.add('guest-comments-content');
+        guestCommentsContentElement.classList.add('guest-comments-content');
 
         const avatarElement = document.createElement('img');
         avatarElement.src = avatar;
@@ -269,3 +316,12 @@ new Vue({
         });
     });
 
+
+    // CREATE TABLE blog_comments (
+    //     id SERIAL PRIMARY KEY,
+    //     guestComment TEXT NOT NULL,
+    //     dateTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    //     guestName TEXT,
+    //     guestAvatar TEXT,
+    //     page_id TEXT NOT NULL
+    // );
