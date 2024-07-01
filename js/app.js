@@ -123,11 +123,11 @@ new Vue({
             const pageId = window.location.pathname;
             console.log('pageId',pageId);
             const comment = {
-                pageId: pageId,
                 guestComment: commentText,
                 dateTime: dateTime,
                 guestName: user.displayName,
-                guestAvatar: user.photoURL
+                guestAvatar: user.photoURL,
+                pageId: pageId
             };
             fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments', {
                 method: 'POST',
@@ -144,38 +144,38 @@ new Vue({
         }
     }
 
-    // function loadComments() {
-    //     console.log('Loading comments...');
-    //     fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
-    //     .then(response => response.json())
-    //     .then(comments => {
-    //         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
-    //         const currentPageId = window.location.pathname; // 获取当前页面的 URL 路径
-    //         const commentsContent = document.querySelector('.comments-content');
-    //         commentsContent.innerHTML = ''; // 清空现有留言
-    //         // 过滤出 page_id 与当前页面 URL 匹配的评论
-    //         const filteredComments = comments.filter(comment => comment.page_id === currentPageId);
-    //         filteredComments.forEach(comment => {
-    //             createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
-    //         });
-    //     })
-    //     .catch(error => console.error('Error:', error));
-    // }
-
     function loadComments() {
         console.log('Loading comments...');
         fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
         .then(response => response.json())
         .then(comments => {
             console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
+            const currentPageId = window.location.pathname; // 获取当前页面的 URL 路径
             const commentsContent = document.querySelector('.comments-content');
             commentsContent.innerHTML = ''; // 清空现有留言
-            comments.forEach(comment => {
+            // 过滤出 page_id 与当前页面 URL 匹配的评论
+            const filteredComments = comments.filter(comment => comment.page_id === currentPageId);
+            filteredComments.forEach(comment => {
                 createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
             });
         })
         .catch(error => console.error('Error:', error));
     }
+
+    // function loadComments() {
+    //     console.log('Loading comments...');
+    //     fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
+    //     .then(response => response.json())
+    //     .then(comments => {
+    //         console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
+    //         const commentsContent = document.querySelector('.comments-content');
+    //         commentsContent.innerHTML = ''; // 清空现有留言
+    //         comments.forEach(comment => {
+    //             createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
+    //         });
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    // }
 
 
     // Initialize Firebase

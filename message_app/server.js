@@ -37,7 +37,7 @@ app.post('/comments', async (req, res) => {
     try {
         console.log('Received data:', { guestComment, dateTime, guestName, guestAvatar, pageId });
         const result = await pool.query(
-            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar, pageId) VALUES ($1, $2, $3, $4)',
+            'INSERT INTO comments (guestcomment, datetime, guestname, guestavatar, pageId) VALUES ($1, $2, $3, $4, $5)',
             [guestComment, dateTime, guestName, guestAvatar, pageId]
         );
         console.log('Insert result:', result);
