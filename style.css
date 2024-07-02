@@ -306,8 +306,54 @@ article.post-content {
     padding:10px;
     border-radius:5px;
 }
+#prev-next {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.prev-container {
+    margin-right: 20px;
+}
+.next-container{
+    margin-left: 20px;
+}
+.prev-button {
+    color: rgb(235, 235, 235);
+    width: 200px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+.prev-button span {
+    text-align: right;
+}
+.next-button {
+    color: rgb(235, 235, 235);
+    width: 200px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+}
+.next-button span{
+    text-align: left;
+}
+#to-prev-next {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    padding: 4px 4px;
+    background-color:rgb(40, 44, 46);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 #comments{
-    padding: 20px;
     margin-bottom: 20px;
     background-color: rgb(40, 44, 46); /* 設置 aside 和 section 的背景色為較深的灰色 */
     padding: 20px; /* 設置 aside 和 section 的內邊距為 20px */
