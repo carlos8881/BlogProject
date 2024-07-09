@@ -353,3 +353,16 @@ document.getElementById('copybutton-article').addEventListener('click', function
         console.error('Error copying text: ', err);
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var searchForm = document.querySelector('.search-container');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            var searchBox = document.querySelector('.search-box');
+            var siteQuery = "site:https://carlos8881.github.io/BlogProject/";
+            if (!searchBox.value.startsWith(siteQuery)) {
+                searchBox.value = siteQuery + searchBox.value;
+            }
+        });
+    }
+});
