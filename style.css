@@ -53,6 +53,7 @@ header .menu ul li a:hover {
 header .search-container {
     display: flex; /* 設置 .search-container 為彈性盒子布局 */
     align-items: center; /* 將 .search-container 內的項目垂直居中對齊 */
+    position: relative;
 }
 header .search-box {
     margin: 0;
@@ -73,7 +74,7 @@ header .search-button {
     margin-top: 0px;
     background: none;
     position: absolute;
-    right: 355px;
+    right: 10px;
     font: 24px font-icon;
 }
 header .search-button i {
@@ -114,6 +115,11 @@ article {
     position: relative; /* 確保 .post 元素相對定位 */
 }
 article.post-content {
+    width: 700px; /* 设置贴文区块的固定宽度 */
+    margin-bottom: 20px;
+    position: relative; /* 確保 .post 元素相對定位 */
+}
+div.post-content {
     width: 700px; /* 设置贴文区块的固定宽度 */
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
@@ -276,6 +282,9 @@ article.post-content {
 .article-footer {
     display: flex;
     flex-direction: row-reverse;
+    position: absolute;
+    right: 20px;
+    bottom: 20px; /* 將元素定位到底部 */
 }
 .article-content-footer {
     display: flex;
@@ -352,6 +361,7 @@ article.post-content {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.5); /* 添加阴影 */
 }
 #comments{
     margin-bottom: 20px;
@@ -572,4 +582,180 @@ footer#footer {
     display: flex;
     justify-content: center;
     margin:20px 0px;
+}
+
+/* 小於 768px 的裝置 */
+@media (max-width: 768px) {
+    header .menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-container {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    #profile {
+        margin-right: 0;
+        display: none;
+    }
+
+    .home-page #profile {
+        display: flex;
+    }
+
+    .posts {
+        height: 320px;
+    }
+
+    #post {
+        width: 100%;
+    }
+
+    article.post-content {
+        width: 100%;
+    }
+    
+    pre {
+        white-space: pre-wrap; /* 保留空白符並允許內容自動換行 */
+        overflow-x: auto; /* 添加水平滾動條以處理超出容器的內容 */
+        word-break: break-word; /* 斷開過長的單詞以避免溢出 */
+    }
+
+    .menu, .sidebar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .menu ul {
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    main .outer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin: 10px; /* 調整外邊距為 10px */
+    }
+
+    .posts, div.post-content {
+        width: 100%; /* 調整寬度為 100% 以適應較小的螢幕 */
+    }
+
+    #prev-next span .title{
+        font-size: 14px;
+    }
+
+    .sidebar-container{
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    #tag-library {
+        width: 100%;
+    }
+
+    .buttons .button, .article-entry .article-more-link a {
+        width: auto; /* 讓按鈕的寬度自適應 */
+    }
+
+    #comments #comment {
+        width: 100%; /* 讓留言框的寬度自適應 */
+    }
+
+}
+
+/* 768px 至 1024px 的裝置 */
+@media (min-width: 768px) and (max-width: 1024px) {
+    header .menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-container {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    #profile {
+        margin-right: 0;
+        display: none;
+    }
+
+    .home-page #profile {
+        display: flex;
+    }
+
+    .posts {
+        height: 320px;
+    }
+
+    #post {
+        width: 100%;
+    }
+
+    article.post-content {
+        width: 100%;
+    }
+    
+    pre {
+        white-space: pre-wrap; /* 保留空白符並允許內容自動換行 */
+        overflow-x: auto; /* 添加水平滾動條以處理超出容器的內容 */
+        word-break: break-word; /* 斷開過長的單詞以避免溢出 */
+    }
+
+    .menu, .sidebar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .menu ul {
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    main .outer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin: 10px; /* 調整外邊距為 10px */
+    }
+
+    .posts, div.post-content {
+        width: 100%; /* 調整寬度為 100% 以適應較小的螢幕 */
+    }
+
+    #prev-next span .title{
+        font-size: 14px;
+    }
+
+    .sidebar-container{
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    #tag-library {
+        width: 100%;
+    }
+
+    .buttons .button, .article-entry .article-more-link a {
+        width: auto; /* 讓按鈕的寬度自適應 */
+    }
+
+    #comments #comment {
+        width: 100%; /* 讓留言框的寬度自適應 */
+    }
+
 }

@@ -13,7 +13,7 @@ new Vue({
         message: 'Hello, world!',
         analytics: [
             { icon: 'bx bxs-edit-alt', count: 4 },
-            { icon: 'bx bxs-message-dots', count: 0 },
+            { icon: 'bx bxs-message-dots', count: '' },
         ],
     },
     methods: {
@@ -38,15 +38,13 @@ new Vue({
     el: '#siderApp',
     data: {
         categories: [
-            { name: '筆記', link: 'category_note.html' },
-            { name: '自傳', link: '#' },
+            { name: '筆記', link: 'list.html?category=筆記' },
+            { name: '自傳', link: 'list.html?category=自傳' },
+            { name: '好文連結', link: 'list.html?category=好文連結' },
         ],
         tags: [
-            { name: 'AI', link: '#' },
-            { name: 'GIT', link: '#' },
-            { name: '好文連結', link: '#' },
-            { name: '筆記', link: '#' },
-            { name: '自傳', link: '#' },
+            { name: 'AI', link: 'list.html?tag=AI' },
+            { name: 'GIT', link: 'list.html?tag=Git' },
         ]
     }
 });

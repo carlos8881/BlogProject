@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Carlos Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/emoji-picker-element/dist/emoji-picker-element.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="module" src="https://unpkg.com/emoji-picker-element"></script>
+    <!-- 使用Firebase 9+的SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyApCGitlToCu3oi_Owoi2cUqjpH1BPIEfY",
+            authDomain: "carlosblogcomment.firebaseapp.com",
+            projectId: "carlosblogcomment",
+            storageBucket: "carlosblogcomment.appspot.com",
+            messagingSenderId: "445901511837",
+            appId: "1:445901511837:web:c8eb760e3219f6e2dbc874",
+            measurementId: "G-N0RFZX5X8C"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        // Initialize Firestore
+        const db = getFirestore(app);
+    </script>
+</head>
+<body>
+    <div>
+        <header>
+            <div class="top">
+                <h1><a href="/">Carlos Blog</a></h1>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li ><a href="about_me.html">About</a></li>
+                    <li><a href="archive.html">Archive</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search">
+                    <button class="search-button"><i class='bx bx-search' ></i></button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="outer">
+                <div class="profile-container" id="profileApp">
+                    <aside id="profile">
+                        <div class="image">
+                            <img :src="image" alt="photo-me" class="profile-img">
+                        </div>
+                        <div class="text-data">
+                            <span class="name">{{ name }}</span>
+                            <span class="other">{{ other }}</span>
+                        </div>
+                        <div class="media-buttons">
+                            <a v-for="link in links" :href="link.url" :style="link.style" class="link">
+                                <i :class="link.icon"></i>
+                            </a>
+                        </div>
+                        <div class="analytics">
+                            <div class="data" v-for="data in analytics">
+                                <i :class="data.icon"></i>
+                                <span id="postCount">{{ data.count }}</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <section id="post">
+                    <article id="list" class="post-content">
+
+                    </article>
+                </section>
+                <div class="sidebar-container" id="siderApp">
+                    <aside class="sidebar">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul class="category-list">
+                            <li v-for="category in categories" :key="category.name" class="category-list-item">
+                                <a :href="category.link" class="category-list-link">{{ category.name }}</a><span></span>
+                            </li>
+                        </ul>
+                    </aside>
+                    <aside id="tag-library">
+                        <h3 class="tag-title">Tags</h3>
+                        <div class="tags">
+                            <a v-for="tag in tags" :key="tag.name" :href="tag.link">{{ tag.name }}</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <footer id="footer">© 2024 Carlos</footer>
+        </main>
+    </div>
+    <script src="js/app.js"></script>
+    <script>
+        // 在list.html中的<script>標籤內
+        document.addEventListener('DOMContentLoaded', function() {
+            // 解析URL查詢參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const tag = urlParams.get('tag');
+            const category = urlParams.get('category');
+            // 假設有一個包含所有文章資訊的對象
+            const articles = [
+                { title: 'About Me', tags: [''], category: '自傳', slug: 'about_me.html' },
+                { title: 'Git 技巧筆記', tags: ['Git'], category: '筆記', slug: 'post_20240605.html' },
+                { title: 'ChatGPT 技巧筆記', tags: ['AI'], category: '筆記', slug: 'post_20240606.html' },
+                { title: 'Git flow 文章連結', tags: ['Git'], category: '好文連結', slug: 'post_20240607.html' },
+            ];
+            // 根據查詢參數過濾文章
+            const filteredArticles = articles.filter(article => {
+                return (tag && article.tags.includes(tag)) || (category && article.category === category);
+            });
+            // 動態生成文章列表
+            const listElement = document.getElementById('list');
+            if (tag || category) {
+                listElement.innerHTML = `<h2>${tag || category}</h2>`;
+                filteredArticles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    // 假設文章詳情頁面的URL結構是 "/articles/{slug}"，其中 {slug} 是文章的slug屬性
+                    articleElement.innerHTML = `<h3><a href="/${article.slug}">${article.title}</a></h3>`;
+                    listElement.appendChild(articleElement);
+                });
+            }
+        });
+    </script>
+    <button id="to-prev-next"><i class='bx bx-chevron-down bx-md'></i></button>
+</body>
+</html>
