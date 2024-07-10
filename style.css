@@ -119,6 +119,12 @@ article.post-content {
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
+article.post-content a:visited{
+    color: rgb(235, 235, 235);
+}
+article.post-content a:link {
+    color: rgb(235, 235, 235); /* 設定未訪問連結的顏色為藍色 */
+}
 div.post-content {
     width: 700px; /* 设置贴文区块的固定宽度 */
     margin-bottom: 20px;
