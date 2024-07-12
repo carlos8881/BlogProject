@@ -110,8 +110,8 @@
             const category = urlParams.get('category');
             // 假設有一個包含所有文章資訊的對象
             const articles = [
-                { title: 'About Me', tags: [''], category: '自傳', slug: 'BlogProject/about_me.html' },
-                { title: 'Git 技巧筆記', tags: ['Git'], category: '筆記', slug: '/post_20240605.html' },
+                { title: 'About Me', tags: [''], category: '自傳', slug: 'about_me.html' },
+                { title: 'Git 技巧筆記', tags: ['Git'], category: '筆記', slug: 'post_20240605.html' },
                 { title: 'ChatGPT 技巧筆記', tags: ['AI'], category: '筆記', slug: 'post_20240606.html' },
                 { title: 'Git flow 文章連結', tags: ['Git'], category: '好文連結', slug: 'post_20240607.html' },
                 { title: '初識CI/CD', tags: ['Devops'], category: '筆記', slug: 'post_20240711.html' },
@@ -127,7 +127,7 @@
                 filteredArticles.forEach(article => {
                     const articleElement = document.createElement('div');
                     // 假設文章詳情頁面的URL結構是 "/articles/{slug}"，其中 {slug} 是文章的slug屬性
-                    articleElement.innerHTML = `<h3><a href="/${article.slug}">${article.title}</a></h3>`;
+                    articleElement.innerHTML = `<h3><a href="${article.slug}">${article.title}</a></h3>`;
                     listElement.appendChild(articleElement);
                 });
             }
