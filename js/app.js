@@ -45,6 +45,7 @@ new Vue({
         tags: [
             { name: 'AI', link: 'list.html?tag=AI' },
             { name: 'GIT', link: 'list.html?tag=Git' },
+            { name: 'Devops', link: 'list.html?tag=Devops' },
         ]
     }
 });
