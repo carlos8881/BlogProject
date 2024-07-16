@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" contnet="width=device-width, initial-scale=1.0">
-        <title>初識CI/CD - Carlos Blog</title>
+        <title>簡述DevOps - Carlos Blog</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://unpkg.com/emoji-picker-element/dist/emoji-picker-element.css" />
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -79,12 +79,12 @@
                         <article class="post-content">
                             <header class="article-header">
                                 <h1>
-                                    <a href="#" class="article-header-a">初識CI/CD</a>
+                                    <a href="#" class="article-header-a">簡述DevOps</a>
                                 </h1>
                                 <div class="article-meta">
                                     <div class="article-date">
                                         <i class='bx bx-calendar'></i>
-                                        <time datetime="2024-06-04 18:00:00 +0800 CST" itemprop="datePublished">2024-07-11</time>
+                                        <time datetime="2024-06-04 18:00:00 +0800 CST" itemprop="datePublished">2024-07-16</time>
                                     </div>
                                     <div class="article-category">
                                         <i class='bx bx-folder'></i>
@@ -98,32 +98,41 @@
                             </header>
                             <div class="article-entry" itemprop="articleBody">
 <pre>
-這邊是以我在網上找的資料做得粗淺的解釋，其中有許多細節我也還沒有太多瞭解，
-待以後有更多經驗再來補充。
+DevOps（Development and Operations）即開發和維運，
+DevOps涉及的工作內容範圍廣泛，
+涵蓋從計劃、代碼管理、測試、自動化、配置、部署到監控和安全等各個方面。
+每一個工作環節都有專門的工具來支持和實現其目標。
+透過整合這些工作流程和工具，DevOps 能夠顯著提高軟體交付的效率和質量。
 
-CI/CD是什麼?
-CI中文翻譯就是持續整合，CD中文翻譯就是持續部署，
-有得人解釋得更明白:那就是自動化整合/部屬。
-
-例如在沒有CI/CD的情況下，開發者在寫完程式碼後，
-1.本機測試正常運作(整合或是單元測試)
-2.專案上傳到公司測試主機測試: a.手動複製 b.FTP c.其他
-3.公司主機測試，正常運作沒問題
-4.給客戶測試
-這樣的流程會花費多一點時間，但容易出錯。
-
-這次假設有CI/CD的情況下，開發者在寫完程式碼後，
-1.本機測試整合或是單元測試後正常運作
-2.專案push到Git平台
-3.公司測試主機安裝CI/CD工具，例如Jenkins(隨時偵測有沒有新的commit)，
-  並且把新檔案抓到測試主機的暫存資料夾
-4.Jenkins會編譯專案，並自動執行單元測試，測試成功把新專案放入檔案的資料夾
-5.CI/CD完成，自動通知成功或失敗
-6.收到通知後到公司主機測試，正常運作沒問題
-7.給客戶測試
-
-其實就是差在複製到測試主機的動作，CI/CD可以自動化部屬，在經常更新的專案，
-使用CI/CD可以節省很多時間，也可以減少人為的錯誤。
+<h2>DevOps 工作內容</h2>
+1.程式碼管理：
+    編寫、審查和管理源程式碼。
+    工具：Git、Bitbucket、GitHub、GitLab。
+2. 持續集成（CI）：
+    將開發中的代碼持續地合併到主分支並自動測試。
+    工具：Jenkins、Travis CI、CircleCI、GitLab CI。
+3. 持續交付（CD）：
+    自動化代碼部署過程，確保每次變更都可以安全地部署到生產環境。
+    工具：Jenkins、Spinnaker、Argo CD、GitLab CI。
+4. 自動化測試：
+    編寫和執行自動化測試以確保代碼的正確性和質量。
+    工具：Selenium、JUnit、TestNG、Cypress。
+5. 基礎設施即代碼（IaC）：
+    通過代碼來管理雲端的基礎架構和版本化管理。
+    工具：Terraform、Ansible、Puppet。
+6. 容器化與編排：
+    將應用程序封裝到容器中，管理容器的部署和擴展。
+    工具：Docker、Kubernetes（K8S）。
+7. 監控與日誌管理：
+    監控系統性能，收集和分析日誌，及時發現和解決問題。
+    工具：Prometheus、Grafana、
+        ELK Stack（Elasticsearch、Logstash、Kibana）、Splunk。
+8. 雲服務管理：
+    使用和管理雲服務資源，確保應用程序在雲環境中高效運行。
+    工具：AWS、Azure、Google Cloud Platform（GCP）。
+9. 持續反饋與改進：
+    收集用戶反饋和系統性能數據，持續改進流程和產品質量。
+    工具：New Relic、Datadog、AppDynamics、PagerDuty。
 </pre>
                             </div>
                             <footer class="article-content-footer">
@@ -135,20 +144,20 @@ CI中文翻譯就是持續整合，CD中文翻譯就是持續部署，
                         </article>
                         <section id="prev-next">
                             <div class="prev-container">
-                                <a class="prev-button" href="post_20240607.html">
+                                <a class="prev-button" href="post_20240711.html">
                                     <span>
                                     &lt; 上一篇<br>
-                                    <span class="title">Git flow 文章連結</span>
+                                    <span class="title">初識CI/CD</span>
                                     </span>
                                 </a>
                             </div>
                             <div class="next-container">
-                                <a class="next-button" href="post_20240716.html">
+                                <div class="next-button" href="">
                                     <span>
-                                    下一篇 ><br>
-                                    <span class="title">簡述DevOps</span>
+                                    <br>
+                                    <span class="title"></span>
                                     </span>
-                                </a>
+                                </div>
                             </div>
                         </section>
                         <section id="comments">
