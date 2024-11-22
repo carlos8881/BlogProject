@@ -12,7 +12,7 @@ new Vue({
         ],
         message: 'Hello, world!',
         analytics: [
-            { icon: 'bx bxs-edit-alt', count: 4 },
+            { icon: 'bx bxs-edit-alt', count: 6 },
             { icon: 'bx bxs-message-dots', count: '' },
         ],
     },
@@ -30,7 +30,7 @@ new Vue({
         }
     },
     mounted: function() {
-        this.fetchComments(); // 組件掛載後立即取得留言
+        this.fetchComments();
     }
 });
 
@@ -97,31 +97,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 检查localStorage中的标志
+    // 檢查localStorage中的標誌
     const scrollToComments = localStorage.getItem('scrollToComments');
     if (scrollToComments === 'true') {
-        // 滚动到评论部分
+        // 滾動到評論部分
         const commentsSection = document.querySelector('#comments');
         if (commentsSection) {
             commentsSection.scrollIntoView({ behavior: 'smooth' });
         }
-        // 清除标志
+        // 清除標誌
         localStorage.removeItem('scrollToComments');
     }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 选择所有评论链接
+    // 選擇所有評論連結
     const commentLinks = document.querySelectorAll('.article-comment-link');
-    // 为每个评论链接添加点击事件监听器
+    // 為每個評論連結添加點擊事件監聽器
     commentLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault(); // 阻止默认的链接行为
-            // 获取当前文章的链接
+            event.preventDefault(); // 阻止默認的連結行為
+            // 獲取當前文章的連結
             const articleUrl = link.closest('.posts').querySelector('.article-header-a').href;
-            // 在localStorage中设置标志
+            // 在localStorage中設置標誌
             localStorage.setItem('scrollToComments', 'true');
-            // 重定向到文章页
+            // 重定向到文章頁
             window.location.href = articleUrl;
         });
     });
@@ -193,7 +193,7 @@ function submitComment() {
         })
         .then(() => {
             commentInput.value = '';
-            loadComments(); // 重新加载留言
+            loadComments(); // 重新加載留言
         })
         .catch(error => console.error('Error:', error));
     }
@@ -204,11 +204,11 @@ function loadComments() {
     fetch('https://myblogcomment-5194e71c8b5e.herokuapp.com/comments')
     .then(response => response.json())
     .then(comments => {
-        console.log('Received comments:', comments); // 打印接收到的评论数据，确保数据格式正确
-        const currentPageId = window.location.pathname; // 获取当前页面的 URL 路径
+        console.log('Received comments:', comments); // 打印接收到的評論數據，確保數據格式正確
+        const currentPageId = window.location.pathname; // 獲取當前頁面的 URL 路徑
         const commentsContent = document.querySelector('.comments-content');
-        commentsContent.innerHTML = ''; // 清空现有留言
-        // 过滤出 pageId 与当前页面 URL 匹配的评论
+        commentsContent.innerHTML = ''; // 清空現有留言
+        // 過濾出 pageId 與當前頁面 URL 匹配的評論
         const filteredComments = comments.filter(comment => comment.pageId === currentPageId);
         filteredComments.forEach(comment => {
             createCommentElement(comment.guestComment, comment.dateTime, comment.guestName, comment.guestAvatar);
@@ -228,7 +228,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-// 登录成功后更新UI
+// 登錄成功後更新UI
 function updateUIForSignIn(user) {
     document.querySelector('.comments-input-username').textContent = user.displayName;
     document.querySelector('.comments-input-form-avatar img').src = user.photoURL;
@@ -237,7 +237,7 @@ function updateUIForSignIn(user) {
     signInOutButton.onclick = googleSignOut;
 }
 
-// 登出后更新UI
+// 登出後更新UI
 function updateUIForSignOut() {
     document.querySelector('.comments-input-username').textContent = 'user';
     document.querySelector('.comments-input-form-avatar img').src = 'images/avatar.jpg';
@@ -246,7 +246,7 @@ function updateUIForSignOut() {
     signInOutButton.onclick = googleSignIn;
 }
 
-// 使用Google账号登录
+// 使用Google賬號登錄
 function googleSignIn() {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -266,7 +266,7 @@ function googleSignOut() {
     });
 }
 
-// 监听用户的登录状态
+// 監聽用戶的登錄狀態
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         console.log(user);
@@ -276,15 +276,14 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
 });
 
-// 绑定登录按钮的点击事件
+// 綁定登錄按鈕的點擊事件
 document.querySelector('.comments-input-form-avatar button').addEventListener('click', googleSignIn);
 
-// 绑定提交评论按钮的点击事件
+// 綁定提交評論按鈕的點擊事件
 document.getElementById('submitComment').addEventListener('click', function() {
-    submitComment(); // 调用发送留言到数据库的函数
+    submitComment(); // 調用發送留言到數據庫的函數
 });
-// 初始時嘗試綁定登入按鈕的點擊事件可能不需要，因為onAuthStateChanged將處理UI更新
-// document.querySelector('button').onclick = googleSignIn;
+// 初始時嘗試綁定登錄按鈕的點擊事件可能不需要，因為onAuthStateChanged將處理UI更新
 
 function createCommentElement(text, date, username, avatar) {
     const commentElement = document.createElement('div');

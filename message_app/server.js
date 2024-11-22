@@ -18,15 +18,15 @@ const pool = new Pool({
   }
 });
 
-// 连接数据库
+// 連接資料庫
 pool.connect((err, client, release) => {
-    if (err) {
-      console.error('Error acquiring client', err.stack);
-    } else {
-      console.log('Database connected successfully');
-      client.release();
-    }
-  });
+  if (err) {
+    console.error('Error acquiring client', err.stack);
+  } else {
+    console.log('Database connected successfully');
+    client.release();
+  }
+});
   
 
 app.use(cors());
@@ -51,7 +51,6 @@ app.post('/comments', async (req, res) => {
 app.get('/comments', async (req, res) => {
   try {
       const results = await pool.query('SELECT * FROM comments');
-      // 确保这里的字段名与数据库中的字段名一致
       const comments = results.rows.map(row => ({
           guestComment: row.guestcomment,
           dateTime: row.datetime,

@@ -110,12 +110,12 @@ article {
 }
 .posts {
     height: 280px;
-    width: 700px; /* 设置贴文区块的固定宽度 */
+    width: 700px; /* 設定貼文區塊的固定寬度 */
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
 article.post-content {
-    width: 700px; /* 设置贴文区块的固定宽度 */
+    width: 700px; /* 設定貼文區塊的固定寬度 */
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
@@ -123,10 +123,10 @@ article.post-content a:visited{
     color: rgb(235, 235, 235);
 }
 article.post-content a:link {
-    color: rgb(235, 235, 235); /* 設定未訪問連結的顏色為藍色 */
+    color: rgb(235, 235, 235); /* 設定未造訪連結的顏色為藍色 */
 }
 div.post-content {
-    width: 700px; /* 设置贴文区块的固定宽度 */
+    width: 700px; /* 設定貼文區塊的固定寬度 */
     margin-bottom: 20px;
     position: relative; /* 確保 .post 元素相對定位 */
 }
@@ -367,7 +367,7 @@ div.post-content {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.5); /* 添加阴影 */
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.5); /* 添加陰影 */
 }
 #comments{
     margin-bottom: 20px;
@@ -468,8 +468,8 @@ button#signInOutButton:hover {
 }
 /* 表情选择器样式 */
 #emoji-picker-container {
-    width: 350px; /* 调整为实际 emoji-picker 的宽度 */
-    height: 280px; /* 调整为实际 emoji-picker 的高度 */
+    width: 350px; /* 調整為實際 emoji-picker 的寬度 */
+    height: 280px; /* 調整為實際 emoji-picker 的高度 */
     position: absolute;
     bottom: 0;
     right: 0;
@@ -477,9 +477,9 @@ button#signInOutButton:hover {
 }
 emoji-picker {
     border: none;
-    max-width: 350px; /* 或根据您的布局需要调整宽度 */
-    max-height: 280px; /* 调整高度以适应页面布局 */
-    overflow-y: auto; /* 如果内容超出高度，允许滚动 */
+    max-width: 350px; /* 或依照您的佈局需求調整寬度 */
+    max-height: 280px; /* 調整高度以適應頁面佈局 */
+    overflow-y: auto; /* 如果內容超出高度，允許滾動 */
 }
 .comments-content-item{
     display: flex;
@@ -533,40 +533,40 @@ emoji-picker {
     font-size: 14px;
     color: rgb(235, 235, 235);
 }
-/* 设置侧边栏标题样式 */
+/* 設定側邊欄標題樣式 */
 .widget-title {
-    color: #ffffff; /* 设置标题颜色 */
+    color: #ffffff; /* 設定標題顏色 */
     margin-bottom: 20px;
 }
-/* 设置分类列表的样式 */
+/* 設定分類清單的樣式 */
 .category-list {
-    list-style: none; /* 移除列表的默认样式 */
+    list-style: none; /* 移除清單的預設樣式 */
     padding: 0px;
 }
 
-/* 设置分类列表项的样式 */
+/* 設定分類清單項目的樣式 */
 .category-list-item {
-    margin-bottom: 20px; /* 设置每个列表项的底部边距 */
+    margin-bottom: 20px; /* 設定每個清單項目的底部邊距 */
 }
 
-/* 设置分类列表链接的样式 */
+/* 設定分類清單連結的樣式 */
 .category-list-link {
-    text-decoration: none; /* 移除链接的下划线 */
-    color: #ffffff; /* 设置链接颜色 */
-    position: relative; /* 设置相对定位以便添加伪元素 */
-    padding-left: 20px; /* 设置左侧内边距以便显示箭头 */
-    display: inline-block; /* 将链接设置为块级元素以便调整位置 */
+    text-decoration: none; /* 移除連結的底線 */
+    color: #ffffff; /* 設定連結顏色 */
+    position: relative; /* 設定相對定位以便加入偽元素 */
+    padding-left: 20px; /* 設定左側內邊距以便顯示箭頭 */
+    display: inline-block; /* 將連結設為區塊級元素以便調整位置 */
 }
 
-/* 在链接左侧添加箭头 */
+/* 在連結左側新增箭頭 */
 .category-list-link::before {
-    content: '\25B6'; /* 使用 Unicode 字符表示向右的三角形箭头 */
-    position: absolute; /* 绝对定位 */
-    left: 6px; /* 左对齐 */
-    top: 50%; /* 垂直居中 */
-    transform: translateY(-50%); /* 调整箭头位置使其垂直居中 */
-    color: #ffffff; /* 设置箭头颜色 */
-    font-size: 8px; /* 设置箭头大小 */
+    content: '\25B6'; /* 使用 Unicode 字元表示向右的三角形箭頭 */
+    position: absolute; /* 絕對定位 */
+    left: 6px; /* 左對齊 */
+    top: 50%; /* 垂直置中 */
+    transform: translateY(-50%); /* 調整箭頭位置使其垂直居中 */
+    color: #ffffff; /* 設定箭頭顏色 */
+    font-size: 8px; /* 設定箭頭大小 */
 }
 #tag-library {
     margin-top: 20px;
