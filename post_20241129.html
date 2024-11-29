@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" contnet="width=device-width, initial-scale=1.0">
+        <title>初階面試基礎筆記 - Carlos's Blog</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://unpkg.com/emoji-picker-element/dist/emoji-picker-element.css" />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script type="module" src="https://unpkg.com/emoji-picker-element"></script>
+        <!-- 使用Firebase 9+的SDK -->
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyApCGitlToCu3oi_Owoi2cUqjpH1BPIEfY",
+                authDomain: "carlosblogcomment.firebaseapp.com",
+                projectId: "carlosblogcomment",
+                storageBucket: "carlosblogcomment.appspot.com",
+                messagingSenderId: "445901511837",
+                appId: "1:445901511837:web:c8eb760e3219f6e2dbc874",
+                measurementId: "G-N0RFZX5X8C"
+            };
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            // Initialize Firestore
+            const db = getFirestore(app);
+        </script>
+    </head>
+    <body id="app">
+        <div >
+            <header>
+                <div class="top">
+                    <h1><a href="index.html">Carlos's Blog</a></h1>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li ><a href="about_me.html">About</a></li>
+                        <li><a href="archive.html">Archive</a></li>
+                    </ul>
+                    <div class="search-container">
+                        <input type="text" class="search-box" placeholder="Search">
+                        <button class="search-button"><i class='bx bx-search' ></i></button>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="outer">
+                    <div class="profile-container" id="profileApp">
+                        <aside id="profile">
+                            <div class="image">
+                                <img :src="image" alt="photo-me" class="profile-img">
+                            </div>
+                            <div class="text-data">
+                                <span class="name">{{ name }}</span>
+                                <span class="other">{{ other }}</span>
+                            </div>
+                            <div class="media-buttons">
+                                <a v-for="link in links" :href="link.url" :style="link.style" class="link">
+                                    <i :class="link.icon"></i>
+                                </a>
+                            </div>
+                            <div class="analytics">
+                                <div class="data" v-for="data in analytics">
+                                    <i :class="data.icon"></i>
+                                    <span id="postCount">{{ data.count }}</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                    <section id="post">
+                        <article class="post-content">
+                            <header class="article-header">
+                                <h1>
+                                    <a href="#" class="article-header-a">初階面試基礎筆記</a>
+                                </h1>
+                                <div class="article-meta">
+                                    <div class="article-date">
+                                        <i class='bx bx-calendar'></i>
+                                        <time datetime="2024-06-04 18:00:00 +0800 CST" itemprop="datePublished">2024-11-29</time>
+                                    </div>
+                                    <div class="article-category">
+                                        <i class='bx bx-folder'></i>
+                                        <a href="list.html?category=筆記" class="article-category-link">筆記</a>
+                                    </div>
+                                    <div class="article-category">
+                                        <i class='bx bx-purchase-tag'></i>
+                                        <a href="" class="article">面試</a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="article-entry" itemprop="articleBody">
+<pre>
+<h3>WEB基礎</h3>
+- HTTP、HTTPS 是什麼?他們的差別?
+超文本傳輸協定，HTTP是明文傳輸，HTTPS可以用SSL/TLS加密傳輸提升安全性。
+
+- DNS 是什麼?
+網名系統，DNS伺服器會幫我們記住IP，讓使用者能輸入域名進入到網站。
+
+- CDN 是什麼?
+內容傳遞網路(系統)，提供數個分佈在各地有暫存功能的伺服器，以縮短物理距離達成加速，此外還支援HTTPS配置SSL/TLS、多個伺服器平衡負載分散壓力。
+
+- IP 是什麼?有什麼類型?使用連接埠端口號(port)的目的是什麼?
+網際協議，分配IP地址與確保路由正確，IPv4、IPv6，IPv6地址數量近乎無盡。
+公有IP 例:8.8.8.8 私有IP 例:192.168.0.1。
+連接埠用於區分不同的數據流，連線網站預設是80、443。
+
+- HTTP 的方法有哪些?
+GET、POST、PUT(例如某筆資料”完全”更新)、DELETE、PATCH(例如某筆資料”部分”更新)、HEAD、OPTIONS。
+
+- Cookie 與 Session 是什麼?
+Cookie儲存在瀏覽器，可保存會話標籤、偏好設置，安全性低。
+Session儲存在伺服器，適合保存臨時消息、表單數據，安全性高。
+
+- CORS 是什麼?
+跨來源資源共享，控制來自不同來源的資源是否可以被請求，例如使用不同來源的API。
+
+- API 與 RESTful API 是什麼?
+應用程式介面，Web上通常是一個URL，用來與後端接觸。
+RESTful API比一般API更具可維護與可擴展性，遵循「無狀態性」原則，所以不需要依賴Session，也因為不需要依賴Session所以對分散式系統較友好且易拓展。
+
+- TCP與 UDP 是什麼?
+傳輸控制協定、使用者資料包協定。
+TCP會確保資料的傳輸完整性與順序，傳輸資料前須先建立連接，適合需要資料完整性的應用。
+UDP傳輸規則、流程簡略，速度快，適合需要低延遲且可忍受傳輸不完整的應用。
+
+- TCP/IP 是什麼? 有 TCP/IP 也有 UDP/IP
+TCP/IP 是一套網絡通訊協議的組合。
+IP負責定位、將資料分割成封包然後向目標地址傳送封包。
+TCP負責建立與停止連線、確認封包順序及完整或重傳封包。
+
+- Webhook 是什麼？
+用於提供訂閱資訊主動由”伺服器”主動傳出的服務，尤其是在跨應用程式時能使”接受端”不用保持輪詢機制就能及時接收訂閱資訊。
+
+## 軟體工程相關問題
+
+- 版本控制是什麼？
+最熱門的應用是Git，類似遊戲存檔機制，能儲存最新進度、建立分支、提交進度、拉取進度到本機，能有效幫助團隊協作。
+
+- 什麼是 CI/CD？
+自動化整合與部屬，利用工具能讓專案在收到更新後自動測試、部屬。
+
+- 什麼是 MVC 架構？
+一種軟體設計模式，分類拆分應用程式來增加可維護可擴展性
+Model（模型），如數據庫交互、數據驗證、業務邏輯處理。
+View（視圖），如HTML、CSS、模板引擎等。
+Controller（控制器），路由處理、請求處理、調用模型和視圖等。
+
+- 什麼是單元測試？
+單元測試通常為一個函式或方法檢測，減少到使用應用程式時才發現錯誤。
+
+- 測試驅動開發 (TDD) 的基本想法。
+開發從測試優先撰寫，再回頭撰寫程式。
+
+- 什麼是設計模式？
+用來為程式碼提可讀、可維護與可拓展性的設計思維或規則，可分為三大類，創建型模式、結構型模式、行為型模式。
+
+- 什麼是 SOLID物件導向設計原則 ?
+SOLID有五個原則
+單一職責原則、開放封閉原則、里氏替換原則、介面隔離原則、依賴反轉原則
+SOLID是高層次的設計指導原則，例如 依賴反轉原則要求高層次程式(例:手機)依賴抽象(例:接收器or介面)，細節(例:應用程式)依賴抽象(接收器or介面)。
+
+- 什麼是 OOP ? 解釋封裝、繼承、多型、抽象。
+將程式模擬現實以模組化的方式設計。
+封裝：隱藏內部細節，提供操作介面。
+繼承：子類繼承父類屬性與方法，實現代碼重用與擴展。
+多型：不同物件可使用相同介面表現不同行為，提升靈活性。
+抽象：定義共通行為的介面或抽象類，子類具體實現細節。
+
+- 什麼是 ORM？
+將資料庫表對映為程式中的類別，使用物件操作資料庫，取代直接撰寫 SQL，簡化 CRUD 操作，提供物件化的資料存取方式。
+
+- 什麼是 Docker？
+容器化技術，將應用程式包含依賴項、環境等等打包，使程式擁有隔離與可移植性。
+
+- 什麼是 Kubernetes？
+伺服器集群與容器的管理工具，可以部屬與管理多個容器，能使伺服器運作容器時有水平擴展、均衡負載功能。
+
+- 什麼是微服務?
+是一種將應用程式功能模組化、服務化的架構設計，透過獨立部署的分散式小服務實現彈性擴展與高併發處理能力。
+
+## 資料庫相關問題
+
+- 什麼是關聯式資料庫與非關聯式資料庫？差別是什麼？
+關聯式資料庫有固定結構並使用SQL語句操作，表格之間可以通過關聯（如外鍵）來建立關係，以行和列的形式組織。
+非關聯式資料庫不使用表格來存儲數據，有多種數據模型，如文檔、鍵值對、列族和圖形等，用於處理大規模和非結構化數據，對特定情況性能較好。
+
+- 什麼是 SQL？舉例常見的CRUD語句
+SQL是專門用於管理和操作關聯式資料庫的語言，提供標準化的語句來進行資料操作。
+讀取（Read）: 使用 SELECT 語句查詢數據。
+例 : SELECT * FROM users;
+
+- 什麼是 Redis ?
+Redis是一款記憶體資料庫，因為使用記憶體儲存資料所以性能快速，適合需要快速讀寫且資料被頻繁使用的場景。
+
+- 什麼是資料庫索引？有什麼優缺點？
+資料庫索引是一種數據結構，用於快速查找和檢索數據庫表中的記錄。索引可以顯著提高查詢速度、排序和分組效率，以及加速聯合查詢，
+缺點如佔用額外的存儲空間、降低插入、更新和刪除操作的性能。
+
+- 什麼是 ACID 特性？
+ACID是一組用於描述數據庫事務特性的標準，確保數據庫操作的可靠性和一致性。
+原子性（Atomicity）: 事務中的所有操作只能全部完成或全部不完成。
+一致性（Consistency）: 事務執行前後，數據庫必須處於一致的狀態。
+隔離性（Isolation）: 多個事務同時執行時，彼此之間不應相互影響。
+持久性（Durability）: 一旦事務提交，對資料庫的改變應該永久保存。
+
+- 什麼是資料正規化？有什麼好處？
+資料正規化是設計資料庫結構的過程，減少資料冗餘，提高資料一致性與操作效率。
+主要目標：減少重複、提高完整性、優化查詢。
+範例：
+1NF：欄位值不可分割。
+2NF：消除部分依賴。
+3NF：消除傳遞依賴。
+例如將多個相關資料拆分為多個表，通過外鍵關聯。
+
+## **操作系統基礎**
+
+- 什麼是進程和線程？區別是什麼？多線程的優缺點？
+- 文件系統基礎，絕對路徑與相對路徑的區別。基本的檔案操作命令，例如 `ls`, `cd`, `mkdir`。
+- 什麼是虛擬記憶體？虛擬記憶體如何工作？為什麼需要它？
+- 死鎖與資源競爭，簡單說明什麼是死鎖。避免死鎖的基本原則。
+- 操作系統中的 IO 模型，阻塞 IO 和非阻塞 IO 的區別。
+
+## **問題解決與團隊合作**
+
+- 什麼是敏捷開發？有哪些基本原則？
+- 什麼是 Scrum 與 Sprint。
+- 技術債是什麼？如何管理它？
+- 什麼是 Code Review？為什麼它重要？
+</pre>
+                            </div>
+                            <footer class="article-content-footer">
+                                <a href="" data-id="" id="copybutton-article" class="article-copy-link">
+                                    <i class='bx bx-copy'></i>
+                                    CopyLink
+                                </a>
+                            </footer>
+                        </article>
+                        <section id="prev-next">
+                            <div class="prev-container">
+                                <!-- <a class="prev-button" href="post_20240711.html">
+                                    <span>
+                                    &lt; 上一篇<br>
+                                    <span class="title">初識CI/CD</span>
+                                    </span>
+                                </a> -->
+                            </div>
+                            <div class="next-container">
+                                <div class="next-button" href="">
+                                    <span>
+                                    <br>
+                                    <span class="title"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="comments">
+                            <div class="comments-header">
+                                <div class="comments-count">
+                                    <span id="commentCount">{{ commentCount }}</span>則留言
+                                </div>
+                            </div>
+                            <div class="comments-input-container">
+                                <form action="#" class="comments-input-form">
+                                    <div class="comments-input-form-avatar">
+                                        <img src="images/avatar.jpg" alt=""></img>
+                                        <span class="comments-input-username">user</span>
+                                        <button id="signInOutButton">登入</button>
+                                    </div>
+                                    <div class="comments-input-form-item"></div>
+                                    <textarea name="comment" id="comment" placeholder="登入後發表留言..."></textarea>
+                                    <div class="emoji-and-submit">
+                                        <button class="emoji-button">😄</button>
+                                        <div id="emoji-picker-container" style="position: absolute; bottom: 0px; right: 0px; display: none;">
+                                            <emoji-picker></emoji-picker>
+                                        </div>
+                                        <div class="submit-group">
+                                            <button class="comments-cancel-button">取消</button>
+                                            <button id="submitComment" class="comments-submit-button">送出</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="comments-content">
+                                <div class="comments-content-item">
+                                    <div class="comments-content-item-text">
+                                        <div class="comment">
+                                            <p>留言區讀取中或伺服器已暫停運作</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!--留言區-->
+                        </section>
+                    </section>
+                    <div class="sidebar-container" id="siderApp">
+                        <aside class="sidebar">
+                            <h3 class="widget-title">Categories</h3>
+                            <ul class="category-list">
+                                <li v-for="category in categories" :key="category.name" class="category-list-item">
+                                    <a :href="category.link" class="category-list-link">{{ category.name }}</a><span></span>
+                                </li>
+                            </ul>
+                        </aside>
+                        <aside id="tag-library">
+                            <h3 class="tag-title">Tags</h3>
+                            <div class="tags">
+                                <a v-for="tag in tags" :key="tag.name" :href="tag.link">{{ tag.name }}</a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <footer id="footer">© 2024 Carlos</footer>
+            </main>
+        </div>
+        <script src="js/app.js"></script>
+        <button id="to-prev-next"><i class='bx bx-chevron-down bx-md'></i></button>
+    </body>
+</html>

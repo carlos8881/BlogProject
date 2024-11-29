@@ -262,6 +262,7 @@ div.post-content {
 }
 .article-entry {
     margin-bottom: 30px;
+    overflow-wrap: break-word;  /* 或者使用 overflow-wrap: break-word; */
 }
 .article-more-link {
     margin-top: 25px;
